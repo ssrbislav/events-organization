@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 import java.util.Set;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -15,6 +16,9 @@ public class Visitor extends User {
 
     @Column(nullable = false)
     private boolean blocked;
+
+    @OneToMany(mappedBy = "visitor")
+    private List<Reservation> reservations;
 
     public Visitor(boolean active, boolean blocked) {
         this.active = active;

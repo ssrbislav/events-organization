@@ -3,7 +3,6 @@ package com.ftn.eventsorganization.model;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Manifest;
 
 @Entity
 public class Hall {
@@ -15,19 +14,15 @@ public class Hall {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
-
-    @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
     @OneToMany(mappedBy = "hall")
-    private List<Sector> sectors = new ArrayList<>();
+    private List<Sector> sectors;
 
-    // Da li ubaciti listu sedista??
 
-    public Hall() {}
+    public Hall() {
+    }
 
     public Long getId() {
         return id;
@@ -39,14 +34,6 @@ public class Hall {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
     }
 
     public Location getLocation() {

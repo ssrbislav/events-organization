@@ -3,7 +3,6 @@ package com.ftn.eventsorganization.model;
 import com.ftn.eventsorganization.enumeration.EventType;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,14 +25,8 @@ public class Event {
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    @ManyToOne
-    @JoinColumn(name = "admin_id", nullable = false)
-    private Admin admin;
-
-    // lista karata
-
     @OneToMany(mappedBy = "event")
-    private List<Hall> halls;
+    private List<EventSector> eventSector;
 
     public Event() {}
 
@@ -81,19 +74,4 @@ public class Event {
         this.location = location;
     }
 
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public List<Hall> getHalls() {
-        return halls;
-    }
-
-    public void setHalls(List<Hall> halls) {
-        this.halls = halls;
-    }
 }
