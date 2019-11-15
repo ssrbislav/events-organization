@@ -25,7 +25,7 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<Event> events;
 
-    private Location() {}
+    public Location() {}
 
     public Long getId() {
         return id;
