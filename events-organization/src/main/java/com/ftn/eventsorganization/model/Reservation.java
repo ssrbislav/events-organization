@@ -11,7 +11,7 @@ public class Reservation {
 
     private boolean canceled;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "visitor_id")
     private Visitor visitor;
 

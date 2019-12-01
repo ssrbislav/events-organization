@@ -1,7 +1,10 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,26 +27,43 @@ public abstract class User {
 
     private String lastName;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date dateOfBirth;
+
     private String address;
 
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     public User() { }
 
-    public User(String username, String password, @Email String email, String firstName, String lastName, String address, String phoneNumber, Set<Role> roles) {
+    public User(String username, String password, @Email String email, String firstName, String lastName,
+                Date dateOfBirth, String address, String phoneNumber, Set<Role> roles) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
+        this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
         this.roles = roles;
+    }
+
+    public User(String username, String password, @Email String email, String firstName, String lastName,
+                Date dateOfBirth, String address, String phoneNumber) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -96,6 +116,14 @@ public abstract class User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getPhoneNumber() {

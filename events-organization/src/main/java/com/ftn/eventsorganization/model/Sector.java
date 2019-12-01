@@ -15,11 +15,11 @@ public class Sector {
 
     // Number of rows in a sector
     private Long numOfRows;
-//
-//    // Number of columns in a sector
+
+    // Number of columns in a sector
     private Long numOfColumns;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 

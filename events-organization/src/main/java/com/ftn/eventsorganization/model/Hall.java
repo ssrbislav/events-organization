@@ -13,7 +13,7 @@ public class Hall {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
