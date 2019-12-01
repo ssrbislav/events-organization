@@ -1,7 +1,6 @@
 package com.ftn.eventsorganization.model;
 
 import com.ftn.eventsorganization.enumeration.RoleType;
-import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 

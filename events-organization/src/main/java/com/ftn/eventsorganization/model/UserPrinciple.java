@@ -1,8 +1,7 @@
-package com.ftn.eventsorganization.service.impl;
+package com.ftn.eventsorganization.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ftn.eventsorganization.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -13,11 +13,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class AppLoaderService implements ApplicationRunner {
+public class AppLoader implements ApplicationRunner {
 
     AdminRepository adminRepository;
 
-    public AppLoaderService(AdminRepository adminRepository) {
+    public AppLoader(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
 
@@ -27,13 +27,13 @@ public class AppLoaderService implements ApplicationRunner {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
             Role role = new Role();
-            role.setType(RoleType.ADMIN);
+            role.setType(RoleType.ROLE_ADMIN);
             Set<Role> roles = new HashSet<>();
             roles.add(role);
 
             Admin admin = new Admin();
             admin.setUsername("admin");
-            admin.setUsername(encoder.encode("admin"));
+            admin.setPassword(encoder.encode("admin"));
             admin.setEmail("admin@admin.com");
             admin.setFirstName("");
             admin.setLastName("");

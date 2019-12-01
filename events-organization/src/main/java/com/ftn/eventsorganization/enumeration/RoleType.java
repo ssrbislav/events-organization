@@ -2,6 +2,6 @@ package com.ftn.eventsorganization.enumeration;
 
 public enum RoleType {
 
-    ADMIN,
-    VISITOR
+    ROLE_ADMIN,
+    ROLE_VISITOR
 }

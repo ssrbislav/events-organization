@@ -9,12 +9,10 @@ import java.util.Set;
 public class RegistrationDTO {
 
     @NotBlank
-    private String email;
-
-    @NotBlank
     private String username;
 
-    private Set<String> role;
+    @NotBlank
+    private String email;
 
     @NotBlank
     private String password;
@@ -37,12 +35,12 @@ public class RegistrationDTO {
     public RegistrationDTO() {
     }
 
-    public RegistrationDTO(@NotBlank String email, @NotBlank String username, Set<String> role, @NotBlank String password, @NotBlank String firstName,
+    public RegistrationDTO(@NotBlank String username, @NotBlank String password, @NotBlank String email, @NotBlank String firstName,
                            @NotBlank String lastName, Date dateOfBirth, @NotBlank String address, @NotBlank String phoneNumber) {
-        this.email = email;
+
         this.username = username;
-        this.role = role;
         this.password = password;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -64,14 +62,6 @@ public class RegistrationDTO {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Set<String> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
     }
 
     public String getPassword() {

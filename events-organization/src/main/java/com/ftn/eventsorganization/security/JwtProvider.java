@@ -1,6 +1,6 @@
 package com.ftn.eventsorganization.security;
 
-import com.ftn.eventsorganization.service.impl.UserPrinciple;
+import com.ftn.eventsorganization.model.UserPrinciple;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

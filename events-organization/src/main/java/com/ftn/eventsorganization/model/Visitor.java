@@ -28,16 +28,11 @@ public class Visitor extends User {
     public Visitor(String username, String password, @Email String email, String firstName, String lastName,
                    Date dateOfBirth, String address, String phoneNumber, Set<Role> roles, boolean active, boolean blocked) {
         super(username, password, email, firstName, lastName, dateOfBirth, address, phoneNumber, roles);
-        this.active = false;
-        this.blocked = false;
+        this.active = active;
+        this.blocked = blocked;
     }
 
-    public Visitor(String username, String password, String email, String firstName, String lastName,
-                   Date dateOfBirth, String address, String phoneNumber) {
-        super(username, password, email, firstName, lastName, dateOfBirth, address, phoneNumber);
-        this.active = false;
-        this.blocked = false;
-    }
+    public Visitor() {}
 
     public boolean isActive() {
         return active;
@@ -53,5 +48,13 @@ public class Visitor extends User {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

@@ -4,12 +4,13 @@ import com.ftn.eventsorganization.DTO.JwtResponse;
 import com.ftn.eventsorganization.DTO.LoginDTO;
 import com.ftn.eventsorganization.DTO.RegistrationDTO;
 import com.ftn.eventsorganization.enumeration.RoleType;
+import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.model.Role;
 import com.ftn.eventsorganization.model.User;
 import com.ftn.eventsorganization.model.Visitor;
-import com.ftn.eventsorganization.repository.RoleRepository;
 import com.ftn.eventsorganization.repository.UserRepository;
 import com.ftn.eventsorganization.security.JwtProvider;
+import com.ftn.eventsorganization.service.impl.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,12 +20,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @CrossOrigin
@@ -44,6 +45,9 @@ public class UserController {
     @Autowired
     JwtProvider jwtProvider;
 
+    @Autowired
+    VisitorService visitorService;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDTO loginRequest) {
 
@@ -59,31 +63,9 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegistrationDTO signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<>("Fail -> Username is already taken!",
-                    HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegistrationDTO signUpRequest) throws InvalidInputException {
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<>("Fail -> Email is already in use!",
-                    HttpStatus.BAD_REQUEST);
-        }
-
-        // Creating passenger's account
-        User user = new Visitor(signUpRequest.getUsername(),
-                encoder.encode(signUpRequest.getPassword()), signUpRequest.getEmail(), signUpRequest.getFirstName(),
-                signUpRequest.getLastName(), signUpRequest.getDateOfBirth(), signUpRequest.getAddress(),
-                signUpRequest.getPhoneNumber()
-        );
-
-        Role role = new Role();
-        role.setType(RoleType.VISITOR);
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-
-        user.setRoles(roles);
-        userRepository.save(user);
+        Optional<User> user = Optional.ofNullable(visitorService.create(signUpRequest));
 
         return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
     }
