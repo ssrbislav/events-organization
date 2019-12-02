@@ -38,14 +38,12 @@ public class VisitorService implements IVisitorService {
     public Visitor create(RegistrationDTO dto) throws InvalidInputException {
 
         Boolean email = userRepository.existsByEmail(dto.getEmail());
-        Boolean username = userRepository.existsByUsername(dto.getUsername());
 
+        System.out.println("NEKI VEOMA DUGACAK TEKST SAMO DA VIDIM STA OVDE OPISE =>   " + email);
         if (email) {
             throw new InvalidInputException("Visitor with email: " + dto.getEmail() + " already exists!");
         }
-//        } else if (username) {
-//            throw new InvalidInputException("Visitor with username: " + dto.getUsername() + " already exists!");
-//        }
+
         Optional<Visitor> visitor;
         try {
             visitor = visitorRepository.findByUsername(dto.getUsername());
@@ -53,6 +51,7 @@ public class VisitorService implements IVisitorService {
                 visitor = Optional.of(new Visitor());
                 visitor.get().setUsername(dto.getUsername());
                 visitor.get().setPassword(encoder.encode(dto.getPassword()));
+                visitor.get().setEmail(dto.getEmail());
                 visitor.get().setFirstName(dto.getFirstName());
                 visitor.get().setLastName(dto.getLastName());
                 visitor.get().setDateOfBirth(dto.getDateOfBirth());
@@ -73,7 +72,7 @@ public class VisitorService implements IVisitorService {
             }
         } catch (InvalidInputException ex) {
             ex.printStackTrace();
-            throw new InvalidInputException("Invalid input!", ex);
+            throw new InvalidInputException("Passenger with username: " + dto.getUsername() + " already exists!", ex);
         }
     }
 }
