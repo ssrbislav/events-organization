@@ -12,6 +12,8 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     List<Location> findAllByName(String name);
 
+    Optional<Location> findById(Long id);
+
     Optional<Location> findByName(String name);
 
     List<Location> findAllByDeletedIsFalse();

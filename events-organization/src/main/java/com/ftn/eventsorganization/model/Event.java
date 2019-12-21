@@ -1,5 +1,6 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ftn.eventsorganization.enumeration.EventType;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Event {
 
     private EventType eventType;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
@@ -28,7 +30,11 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private List<EventSector> eventSector;
 
-    public Event() {}
+    private boolean deleted;
+
+    public Event() {
+        this.deleted = false;
+    }
 
     public Long getId() {
         return id;
@@ -74,4 +80,19 @@ public class Event {
         this.location = location;
     }
 
+    public List<EventSector> getEventSector() {
+        return eventSector;
+    }
+
+    public void setEventSector(List<EventSector> eventSector) {
+        this.eventSector = eventSector;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

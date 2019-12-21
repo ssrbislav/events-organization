@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LocationService implements ILocationService {
+public class LocationServiceImpl implements ILocationService {
 
     @Autowired
     LocationRepository locationRepository;
@@ -73,7 +73,6 @@ public class LocationService implements ILocationService {
                 throw new ObjectNotFoundException();
             }
         } catch (ObjectNotFoundException ex) {
-            ex.printStackTrace();
             throw new ObjectNotFoundException("Location does not exist!", ex);
         }
     }
@@ -86,7 +85,6 @@ public class LocationService implements ILocationService {
             locationRepository.save(location);
             return location.isDeleted();
         } catch (ObjectNotFoundException ex) {
-            ex.printStackTrace();
             throw new ObjectNotFoundException("Location not found!", ex);
         }
     }

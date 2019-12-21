@@ -38,8 +38,6 @@ public class VisitorService implements IVisitorService {
     public Visitor create(RegistrationDTO dto) throws InvalidInputException {
 
         Boolean email = userRepository.existsByEmail(dto.getEmail());
-
-        System.out.println("NEKI VEOMA DUGACAK TEKST SAMO DA VIDIM STA OVDE OPISE =>   " + email);
         if (email) {
             throw new InvalidInputException("Visitor with email: " + dto.getEmail() + " already exists!");
         }
