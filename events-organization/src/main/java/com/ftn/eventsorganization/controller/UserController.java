@@ -3,11 +3,8 @@ package com.ftn.eventsorganization.controller;
 import com.ftn.eventsorganization.DTO.JwtResponse;
 import com.ftn.eventsorganization.DTO.LoginDTO;
 import com.ftn.eventsorganization.DTO.RegistrationDTO;
-import com.ftn.eventsorganization.enumeration.RoleType;
 import com.ftn.eventsorganization.exception.InvalidInputException;
-import com.ftn.eventsorganization.model.Role;
 import com.ftn.eventsorganization.model.User;
-import com.ftn.eventsorganization.model.Visitor;
 import com.ftn.eventsorganization.repository.UserRepository;
 import com.ftn.eventsorganization.security.JwtProvider;
 import com.ftn.eventsorganization.service.impl.VisitorService;
@@ -24,9 +21,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -47,6 +43,13 @@ public class UserController {
 
     @Autowired
     VisitorService visitorService;
+
+    @GetMapping("")
+    public ResponseEntity<?> getAllUsers() {
+        List<User> users = userRepository.findAll();
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginDTO loginRequest) {

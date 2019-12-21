@@ -1,14 +1,6 @@
-package com.ftn.eventsorganization.model;
+package com.ftn.eventsorganization.DTO;
 
-import javax.persistence.*;
-import java.util.List;
-
-@Entity
-public class Location {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class LocationDTO {
 
     private String name;
 
@@ -22,27 +14,13 @@ public class Location {
 
     private String country;
 
-    private boolean deleted;
-
-    @OneToMany(mappedBy = "location")
-    private List<Event> events;
-
-    public Location(String name, String streetName, int number, String city, String zipCode, String country, boolean deleted) {
+    public LocationDTO(String name, String streetName, int number, String city, String zipCode, String country) {
         this.name = name;
         this.streetName = streetName;
         this.number = number;
         this.city = city;
         this.zipCode = zipCode;
         this.country = country;
-        this.deleted = false;
-    }
-
-    public Location() {
-        this.deleted = false;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getName() {
@@ -91,21 +69,5 @@ public class Location {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 }
