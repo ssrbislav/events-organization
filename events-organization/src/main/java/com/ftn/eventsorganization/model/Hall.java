@@ -1,7 +1,8 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,7 @@ public class Hall {
 
     private String name;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
@@ -20,8 +22,10 @@ public class Hall {
     @OneToMany(mappedBy = "hall")
     private List<Sector> sectors;
 
+    private boolean deleted;
 
     public Hall() {
+        this.deleted = false;
     }
 
     public Long getId() {
@@ -50,5 +54,13 @@ public class Hall {
 
     public void setSectors(List<Sector> sectors) {
         this.sectors = sectors;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

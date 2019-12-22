@@ -6,6 +6,7 @@ import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Hall;
 import com.ftn.eventsorganization.model.Sector;
 import com.ftn.eventsorganization.repository.SectorRepository;
+import com.ftn.eventsorganization.service.IHallService;
 import com.ftn.eventsorganization.service.ISectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,36 +20,43 @@ public class SectorServiceImpl implements ISectorService {
     @Autowired
     SectorRepository sectorRepository;
 
+    @Autowired
+    IHallService hallService;
+
     @Override
     public List<Sector> findAll() {
-        return sectorRepository.findAll();
+        return sectorRepository.findAllByDeletedIsFalse();
     }
 
     @Override
     public Sector getOne(Long id) throws ObjectNotFoundException {
         return sectorRepository.findById(id).orElseThrow(() ->
-                new ObjectNotFoundException("Sector with id - \" + id + \" does not exist!\""));
+                new ObjectNotFoundException("Sector with id - " + id + " does not exist!"));
     }
 
     @Override
     public Sector create(SectorDTO dto) throws InvalidInputException, ObjectNotFoundException {
         Optional<Sector> sector;
-        Optional<Hall> hall = Optional.of(new Hall());
-        // FIX HALL
+        Hall hall;
         try {
-//            try {
-//
-//            } catch (ObjectNotFoundException ex) {
-//                throw new ObjectNotFoundException("Hall not found!", ex);
-//            }
             sector = Optional.of(new Sector());
-            sector.get().setHall(hall.get());
-            sector.get().setNumOfColumns(dto.getNumOfColumns());
-            sector.get().setNumOfRows(dto.getNumOfRows());
+            try {
+
+                /*
+                ** UBACITI PROVERU DA NE MOZE DA SE DODA U OBRISANU LOKACIJU!!
+                 */
+
+                hall = hallService.getOne(dto.getHallId());
+                sector.get().setHall(hall);
+            } catch (ObjectNotFoundException ex) {
+                throw new ObjectNotFoundException("Hall not found!", ex);
+            }
             sector.get().setSectorMark(dto.getSectorMark());
             if(dto.getNumOfColumns() == 0 || dto.getNumOfRows() == 0) {
                 throw new InvalidInputException();
             }
+            sector.get().setNumOfColumns(dto.getNumOfColumns());
+            sector.get().setNumOfRows(dto.getNumOfRows());
             return sectorRepository.save(sector.get());
         } catch (InvalidInputException ex) {
             throw new InvalidInputException("Rows and Columns must not be 0!", ex);

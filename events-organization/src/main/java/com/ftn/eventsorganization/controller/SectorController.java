@@ -5,7 +5,6 @@ import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Sector;
 import com.ftn.eventsorganization.service.ISectorService;
-import com.ftn.eventsorganization.service.impl.SectorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +56,7 @@ public class SectorController {
 
         boolean deleted = sectorService.delete(id);
 
-        return  new ResponseEntity<>("Sector deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Sector deleted successfully", HttpStatus.OK);
     }
 
 }

@@ -25,6 +25,9 @@ public class Location {
     private boolean deleted;
 
     @OneToMany(mappedBy = "location")
+    private List<Hall> halls;
+
+    @OneToMany(mappedBy = "location")
     private List<Event> events;
 
     public Location(String name, String streetName, int number, String city, String zipCode, String country, boolean deleted) {
@@ -99,6 +102,14 @@ public class Location {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public List<Hall> getHalls() {
+        return halls;
+    }
+
+    public void setHalls(List<Hall> halls) {
+        this.halls = halls;
     }
 
     public List<Event> getEvents() {
