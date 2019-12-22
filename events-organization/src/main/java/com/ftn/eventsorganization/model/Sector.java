@@ -1,5 +1,7 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ public class Sector {
     // Number of columns in a sector
     private Long numOfColumns;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
@@ -26,7 +29,10 @@ public class Sector {
     @OneToMany(mappedBy = "sector")
     private List<EventSector> eventSectors;
 
+    private boolean deleted;
+
     public Sector() {
+        this.deleted = false;
     }
 
     public Long getId() {
@@ -41,29 +47,27 @@ public class Sector {
         this.sectorMark = sectorMark;
     }
 
-    public Long getRows() {
+    public Long getNumOfRows() {
         return numOfRows;
     }
 
-    public void setRows(Long numOfRows) {
+    public void setNumOfRows(Long numOfRows) {
         this.numOfRows = numOfRows;
     }
 
-    public Long getColumns() {
+    public Long getNumOfColumns() {
         return numOfColumns;
     }
 
-    public void setColumns(Long numOfColumns) {
+    public void setNumOfColumns(Long numOfColumns) {
         this.numOfColumns = numOfColumns;
     }
 
     public Hall getHall() {
-
         return hall;
     }
 
     public void setHall(Hall hall) {
-
         this.hall = hall;
     }
 
@@ -71,8 +75,15 @@ public class Sector {
         return eventSectors;
     }
 
-    public void setEventSectors(List<EventSector> eventSector) {
+    public void setEventSectors(List<EventSector> eventSectors) {
         this.eventSectors = eventSectors;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

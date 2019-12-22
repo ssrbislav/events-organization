@@ -6,19 +6,6 @@ import java.util.List;
 @Entity
 public class EventSector {
 
-//    @EmbeddedId
-//    EventSectorId id;
-//
-//    @ManyToOne
-//    @MapsId("event_id")
-//    @JoinColumn(name = "event_id")
-//    private Event event;
-//
-//    @ManyToOne
-//    @MapsId("sector_id")
-//    @JoinColumn(name = "sector_id")
-//    private Sector sector;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,15 +25,6 @@ public class EventSector {
 
     public EventSector() {
     }
-
-//    public EventSectorId getId() {
-//        return id;
-//    }
-//
-//    public void setId(EventSectorId id) {
-//        this.id = id;
-//    }
-
 
     public Long getId() {
         return id;
