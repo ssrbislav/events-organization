@@ -7,7 +7,7 @@ import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.model.User;
 import com.ftn.eventsorganization.repository.UserRepository;
 import com.ftn.eventsorganization.security.JwtProvider;
-import com.ftn.eventsorganization.service.impl.VisitorService;
+import com.ftn.eventsorganization.service.impl.VisitorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,7 +42,7 @@ public class UserController {
     JwtProvider jwtProvider;
 
     @Autowired
-    VisitorService visitorService;
+    VisitorServiceImpl visitorService;
 
     @GetMapping("")
     public ResponseEntity<?> getAllUsers() {

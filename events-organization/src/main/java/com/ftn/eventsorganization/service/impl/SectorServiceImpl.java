@@ -30,7 +30,7 @@ public class SectorServiceImpl implements ISectorService {
 
     @Override
     public Sector getOne(Long id) throws ObjectNotFoundException {
-        return sectorRepository.findById(id).orElseThrow(() ->
+        return sectorRepository.findByIdAndDeletedIsFalse(id).orElseThrow(() ->
                 new ObjectNotFoundException("Sector with id - " + id + " does not exist!"));
     }
 

@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class VisitorService implements IVisitorService {
+public class VisitorServiceImpl implements IVisitorService {
 
     @Autowired
     UserRepository userRepository;

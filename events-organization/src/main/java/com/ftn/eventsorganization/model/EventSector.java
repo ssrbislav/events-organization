@@ -1,5 +1,7 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,10 +12,12 @@ public class EventSector {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "event_id")
     private Event event;
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "sector_id")
     private Sector sector;

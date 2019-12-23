@@ -17,4 +17,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByDeletedIsFalse();
 
     Optional<Event> findById(Long id);
+
+    Optional<Event> findByIdAndDeletedIsFalse(Long id);
 }

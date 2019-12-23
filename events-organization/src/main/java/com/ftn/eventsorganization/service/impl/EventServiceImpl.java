@@ -37,7 +37,7 @@ public class EventServiceImpl implements IEventService {
 
     @Override
     public Event getOne(Long id) throws ObjectNotFoundException {
-        return eventRepository.findById(id).orElseThrow(() ->
+        return eventRepository.findByIdAndDeletedIsFalse(id).orElseThrow(() ->
                 new ObjectNotFoundException("Event with id - " + id + " does not exist!"));
     }
 

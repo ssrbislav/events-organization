@@ -11,4 +11,6 @@ public interface SectorRepository extends JpaRepository<Sector, Long> {
     List<Sector> findAllByDeletedIsFalse();
 
     Optional<Sector> findById(Long id);
+
+    Optional<Sector> findByIdAndDeletedIsFalse(Long id);
 }

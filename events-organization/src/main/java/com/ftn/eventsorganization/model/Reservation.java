@@ -1,6 +1,7 @@
 package com.ftn.eventsorganization.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Reservation {
@@ -9,11 +10,14 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean canceled;
-
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "visitor_id")
     private Visitor visitor;
+
+    @OneToMany(mappedBy = "reservation")
+    private List<Ticket> tickets;
+
+    private boolean canceled;
 
     public Reservation() {}
 
