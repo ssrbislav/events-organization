@@ -30,7 +30,7 @@ public class HallServiceImpl implements IHallService {
 
     @Override
     public Hall getOne(Long id) throws ObjectNotFoundException {
-        return hallRepository.findById(id).orElseThrow(() ->
+        return hallRepository.findByIdAndDeletedIsFalse(id).orElseThrow(() ->
                 new ObjectNotFoundException("Hall with id - " + id + " does not exist!"));
     }
 

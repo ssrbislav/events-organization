@@ -1,10 +1,10 @@
 package com.ftn.eventsorganization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ftn.eventsorganization.enumeration.SectorType;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Sector {

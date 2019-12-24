@@ -12,5 +12,5 @@ public interface HallRepository extends JpaRepository<Hall, Long> {
 
     List<Hall> findAllByDeletedIsFalse();
 
-    Optional<Hall> findById(Long id);
+    Optional<Hall> findByIdAndDeletedIsFalse(Long id);
 }

@@ -1,6 +1,6 @@
 package com.ftn.eventsorganization.enumeration;
 
-public enum SeatType {
+public enum SectorType {
 
     REGULAR,
     VIP,

@@ -20,7 +20,7 @@ public class LocationServiceImpl implements ILocationService {
 
     @Override
     public Location getOne(Long id) throws ObjectNotFoundException {
-        return locationRepository.findById(id).orElseThrow(() ->
+        return locationRepository.findByIdAndDeletedIsFalse(id).orElseThrow(() ->
                 new ObjectNotFoundException("Location with id - " + id + " does not exist!"));
     }
 

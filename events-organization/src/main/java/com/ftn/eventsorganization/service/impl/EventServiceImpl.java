@@ -25,9 +25,6 @@ public class EventServiceImpl implements IEventService {
     EventRepository eventRepository;
 
     @Autowired
-    LocationRepository locationRepository;
-
-    @Autowired
     ILocationService locationService;
 
     @Override

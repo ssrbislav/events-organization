@@ -1,6 +1,7 @@
 package com.ftn.eventsorganization.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ftn.eventsorganization.enumeration.SectorType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +27,9 @@ public class EventSector {
     private List<Ticket> tickets;
 
     double price;
+
+    // Type of sector -> VIP, REGULAR ...
+    private SectorType sectorType;
 
     public EventSector() {
     }
@@ -64,5 +68,13 @@ public class EventSector {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public SectorType getSectorType() {
+        return sectorType;
+    }
+
+    public void setSectorType(SectorType sectorType) {
+        this.sectorType = sectorType;
     }
 }

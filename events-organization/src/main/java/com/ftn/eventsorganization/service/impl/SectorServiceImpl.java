@@ -41,11 +41,6 @@ public class SectorServiceImpl implements ISectorService {
         try {
             sector = Optional.of(new Sector());
             try {
-
-                /*
-                ** UBACITI PROVERU DA NE MOZE DA SE DODA U OBRISANU LOKACIJU!!
-                 */
-
                 hall = hallService.getOne(dto.getHallId());
                 sector.get().setHall(hall);
             } catch (ObjectNotFoundException ex) {
