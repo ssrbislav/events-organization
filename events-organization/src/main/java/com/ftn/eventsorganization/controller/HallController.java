@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class HallController {
         return new ResponseEntity<>(halls, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Hall> findById(@PathVariable Long id) throws ObjectNotFoundException {
 
@@ -35,6 +37,7 @@ public class HallController {
         return new ResponseEntity<>(hall, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Hall> create(@RequestBody HallDTO dto) throws Exception {
 
@@ -43,6 +46,7 @@ public class HallController {
         return new ResponseEntity<>(hall, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Hall> update(@RequestBody Hall hallUpdate) throws ObjectNotFoundException {
 
@@ -51,6 +55,7 @@ public class HallController {
         return new ResponseEntity<>(hall, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws ObjectNotFoundException {
 

@@ -14,6 +14,8 @@ public interface EventSectorRepository extends JpaRepository<EventSector, Long> 
 
     List<EventSector> findAll();
 
+    Optional<EventSector> findByEventIdAndSectorId(Long eventId, Long sectorId);
+
     List<EventSector> findAllByEvent(Event event);
 
     List<EventSector> findAllBySector(Sector sector);

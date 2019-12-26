@@ -33,7 +33,7 @@ public class LocationServiceImpl implements ILocationService {
     public Location create(LocationDTO dto) throws InvalidInputException {
         Optional<Location> location;
         try {
-            if (!locationRepository.findByName(dto.getName()).isPresent()) {
+            if (!locationRepository.findByNameAndDeletedIsFalse(dto.getName()).isPresent()) {
                 location = Optional.of(new Location());
                 location.get().setCity(dto.getCity());
                 location.get().setCountry(dto.getCountry());

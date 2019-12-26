@@ -1,5 +1,7 @@
 package com.ftn.eventsorganization.DTO;
 
+import com.ftn.eventsorganization.enumeration.SectorType;
+
 public class EventSectorDTO {
 
     private Long sectorId;
@@ -8,13 +10,16 @@ public class EventSectorDTO {
 
     private double price;
 
+    private SectorType sectorType;
+
     public EventSectorDTO() {
     }
 
-    public EventSectorDTO(Long sectorId, Long eventId, double price) {
+    public EventSectorDTO(Long sectorId, Long eventId, double price, SectorType sectorType) {
         this.sectorId = sectorId;
         this.eventId = eventId;
         this.price = price;
+        this.sectorType = sectorType;
     }
 
     public Long getSectorId() {
@@ -39,5 +44,13 @@ public class EventSectorDTO {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public SectorType getSectorType() {
+        return sectorType;
+    }
+
+    public void setSectorType(SectorType sectorType) {
+        this.sectorType = sectorType;
     }
 }

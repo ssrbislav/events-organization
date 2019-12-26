@@ -61,6 +61,10 @@ public class EventSectorServiceImpl implements IEventSectorService {
     public EventSector create(EventSectorDTO dto) throws InvalidInputException, ObjectNotFoundException {
         Optional<EventSector> es;
         try {
+            if(repository.findByEventIdAndSectorId(dto.getEventId(), dto.getSectorId()).isPresent()) {
+                System.out.println("JEBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!!!!!!!*********************************");
+                throw new ObjectNotFoundException("found");
+            }
             es = Optional.of(new EventSector());
             try {
                 Sector sector = sectorService.getOne(dto.getSectorId());
@@ -77,10 +81,15 @@ public class EventSectorServiceImpl implements IEventSectorService {
             if (dto.getPrice() < 0)
                 throw new InvalidInputException("price");
             es.get().setPrice(dto.getPrice());
+            es.get().setSectorType(dto.getSectorType());
             return repository.save(es.get());
         } catch (ObjectNotFoundException ex) {
-            if (ex.getMessage().equals("sector"))
+            if (ex.getMessage().equals("sector")) {
                 throw new ObjectNotFoundException("Sector not found!");
+            }
+            else if(ex.getMessage().equals("found")) {
+                throw new ObjectNotFoundException("Entity with same Event and Sector already created.");
+            }
             throw new ObjectNotFoundException("Event not found!");
         } catch (InvalidInputException ex) {
             throw new InvalidInputException("Price must be positive number!");

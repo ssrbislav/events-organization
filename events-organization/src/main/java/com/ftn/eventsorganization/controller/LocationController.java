@@ -21,6 +21,7 @@ public class LocationController {
     @Autowired
     ILocationService locationService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("")
     public ResponseEntity<List<Location>> findAllLocations() {
 
@@ -29,6 +30,7 @@ public class LocationController {
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Location> findOneById(@PathVariable Long id) throws ObjectNotFoundException {
 
@@ -46,6 +48,7 @@ public class LocationController {
         return new ResponseEntity<>(location, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Location> updateLocation(@RequestBody Location loc) throws ObjectNotFoundException {
 
@@ -54,12 +57,13 @@ public class LocationController {
         return new ResponseEntity<>(location, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteLocation(@PathVariable Long id) throws ObjectNotFoundException {
 
         boolean deleted = locationService.delete(id);
 
-        return new ResponseEntity<>("User successfully deleted!", HttpStatus.OK);
+        return new ResponseEntity<>("Location successfully deleted!", HttpStatus.OK);
     }
 
 }

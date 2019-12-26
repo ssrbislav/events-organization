@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class EventSectorController {
         return new ResponseEntity<>(eventSectors, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<EventSector> findById(@PathVariable Long id) throws ObjectNotFoundException {
 
@@ -36,6 +38,7 @@ public class EventSectorController {
         return new ResponseEntity<>(es, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<EventSector> create(@RequestBody EventSectorDTO dto) throws InvalidInputException, ObjectNotFoundException {
 
@@ -44,6 +47,7 @@ public class EventSectorController {
         return new ResponseEntity<>(es, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<EventSector> update(@RequestBody EventSector eventSector) throws InvalidInputException, ObjectNotFoundException {
 
@@ -52,6 +56,7 @@ public class EventSectorController {
         return new ResponseEntity<>(es, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws InvalidInputException, ObjectNotFoundException {
 
