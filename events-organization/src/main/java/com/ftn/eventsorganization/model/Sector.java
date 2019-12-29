@@ -22,7 +22,7 @@ public class Sector {
     private Long numOfColumns;
 
     @JsonIgnore
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 

@@ -54,7 +54,7 @@ public class EventServiceImpl implements IEventService {
             if (dto.getStartDate().before(new Date())) {
                 throw new InvalidInputException("date");
             }
-            if (!eventRepository.findByName(dto.getName()).isPresent()) {
+            if (!eventRepository.findByNameAndDeletedIsFalse(dto.getName()).isPresent()) {
                 event = Optional.of(new Event());
                 event.get().setName(dto.getName());
                 event.get().setEventType(dto.getEventType());

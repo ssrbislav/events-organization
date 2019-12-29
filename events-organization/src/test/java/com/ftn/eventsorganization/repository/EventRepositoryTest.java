@@ -1,8 +1,8 @@
 package com.ftn.eventsorganization.repository;
 
-import com.ftn.eventsorganization.model.Hall;
+import com.ftn.eventsorganization.enumeration.EventType;
+import com.ftn.eventsorganization.model.Event;
 import com.ftn.eventsorganization.model.Location;
-import com.ftn.eventsorganization.model.Sector;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -22,16 +23,13 @@ import static org.junit.Assert.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
 @Rollback(value = true)
-public class SectorRepositoryTest {
+public class EventRepositoryTest {
 
     @Autowired
-    private SectorRepository sectorRepository;
+    EventRepository eventRepository;
 
     @Autowired
-    private HallRepository hallRepository;
-
-    @Autowired
-    private LocationRepository locationRepository;
+    LocationRepository locationRepository;
 
     @Before
     public void setUp() {
@@ -42,57 +40,58 @@ public class SectorRepositoryTest {
         location.setCountry("Srbija");
         location.setZipCode("21000");
         Location loc = locationRepository.save(location);
-
-        Hall hall = new Hall();
-        hall.setName("Arena");
-        hall.setLocation(loc);
-        hallRepository.save(hall);
     }
 
     @Test
     @Transactional
     @Rollback
-    public void testSectorSave() {
-        Sector sector = new Sector();
-        sector.setSectorMark("Sector 3");
-        sector.setNumOfColumns(4L);
-        sector.setNumOfRows(4L);
-        sector.setHall(hallRepository.getOne(1L));
+    public void testSaveEvent() {
+        Event event = new Event();
+        event.setLocation(locationRepository.findById(1L).get());
+        event.setStartDate(new Date());
+        event.setEndDate(new Date());
+        event.setName("Koncert");
+        event.setEventType(EventType.CONCERT);
+        Event savedEvent = eventRepository.save(event);
 
-        Sector savedSector = sectorRepository.save(sector);
-
-        assertEquals(sector.getSectorMark(), savedSector.getSectorMark());
+        assertEquals(event.getName(), savedEvent.getName());
     }
 
     @Test(expected = DataIntegrityViolationException.class)
     public void testSaveEmpty() {
-        sectorRepository.save(new Sector());
+        eventRepository.save(new Event());
     }
 
     @Test
     @Transactional
     @Rollback
     public void testFindAllByDeletedIsFalse() {
-        List<Sector> sectors = sectorRepository.findAllByDeletedIsFalse();
+        Event event = new Event();
+        event.setName("Event");
+        event.setLocation(locationRepository.getOne(1L));
+        eventRepository.save(event);
 
-        assertNotNull(sectors);
-        assertFalse(sectors.isEmpty());
+        List<Event> events = eventRepository.findAllByDeletedIsFalse();
+
+        assertFalse(events.isEmpty());
+        assertNotNull(events);
     }
 
     @Test
     @Transactional
     @Rollback
     public void testFindByIdAndDeletedIsFalse() {
-        Sector sector = new Sector();
-        sector.setSectorMark("Sector 3");
-        sector.setNumOfColumns(4L);
-        sector.setNumOfRows(4L);
-        sector.setHall(hallRepository.getOne(1L));
+        Event event = new Event();
+        event.setLocation(locationRepository.findById(1L).get());
+        event.setStartDate(new Date());
+        event.setEndDate(new Date());
+        event.setName("Event");
+        event.setEventType(EventType.CONCERT);
+        Event savedEvent = eventRepository.save(event);
 
-        Sector savedSector = sectorRepository.save(sector);
-
-        assertNotNull(sector);
-        assertFalse(savedSector.isDeleted());
+        assertEquals("Event", savedEvent.getName());
+        assertFalse(savedEvent.isDeleted());
+        assertNotNull(savedEvent);
     }
 
 }
