@@ -41,6 +41,7 @@ public class LocationRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testFindByNameAndDeletedIsFalse() {
         Location location = new Location();
@@ -56,6 +57,7 @@ public class LocationRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testfindByIdAndDeletedIsFalse() {
         Location location = new Location();
@@ -72,6 +74,7 @@ public class LocationRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testfindAllByDeletedIsFalse() {
         List<Location> locations = locationRepository.findAllByDeletedIsFalse();

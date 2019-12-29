@@ -13,6 +13,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -30,8 +31,7 @@ public class HallRepositoryTest {
     LocationRepository locationRepository;
 
     @Before
-    @Rollback
-    public void createHall() {
+    public void setUp() {
         Location location = new Location();
         location.setName("Sajam");
         location.setStreetName("Novosadskog sajma");
@@ -42,6 +42,7 @@ public class HallRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testSaveHall() {
         Location location = new Location();
@@ -62,12 +63,12 @@ public class HallRepositoryTest {
     }
 
     @Test(expected = DataIntegrityViolationException.class)
-    @Rollback
     public void testSaveEmpty() {
         hallRepository.save(new Hall());
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testFindByIdAndDeletedIsFalse() {
         Optional<Location> location = locationRepository.findById(1L);
@@ -82,6 +83,7 @@ public class HallRepositoryTest {
     }
 
     @Test
+    @Transactional
     @Rollback
     public void testFindAllByDeletedIsFalse() {
         List<Hall> halls = hallRepository.findAllByDeletedIsFalse();
