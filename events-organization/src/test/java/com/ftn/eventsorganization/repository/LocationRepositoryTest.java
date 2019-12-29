@@ -1,12 +1,10 @@
 package com.ftn.eventsorganization.repository;
 
 import com.ftn.eventsorganization.model.Location;
-import com.sun.tools.jconsole.JConsoleContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,7 +27,6 @@ public class LocationRepositoryTest {
     @Transactional
     @Rollback
     public void testLocationSave() {
-
         Location location = new Location();
         location.setName("Sajam");
         location.setStreetName("Novosadskog sajma");
@@ -59,6 +56,7 @@ public class LocationRepositoryTest {
     }
 
     @Test
+    @Rollback
     public void testfindByIdAndDeletedIsFalse() {
         Location location = new Location();
         location.setName("Lokacija");
@@ -74,12 +72,11 @@ public class LocationRepositoryTest {
     }
 
     @Test
+    @Rollback
     public void testfindAllByDeletedIsFalse() {
-
         List<Location> locations = locationRepository.findAllByDeletedIsFalse();
 
         assertNotNull(locations);
         assertFalse(locations.isEmpty());
     }
-
 }
