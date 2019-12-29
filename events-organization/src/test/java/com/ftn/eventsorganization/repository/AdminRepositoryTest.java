@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -43,6 +44,7 @@ public class AdminRepositoryTest {
 
         Optional<Admin> findAdmin = adminRepository.findById(admin.getId());
 
+        assertNotNull(findAdmin);
         assertEquals(admin.getId(), findAdmin.get().getId());
     }
 

@@ -6,7 +6,6 @@ import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Location;
 import com.ftn.eventsorganization.repository.LocationRepository;
 import com.ftn.eventsorganization.service.ILocationService;
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -33,15 +33,6 @@ public class LocationServiceTest {
     @Autowired
     ILocationService locationService;
 
-    @Autowired
-    LocationRepository repository;
-
-    @Before
-    public void setUp() {
-        Location location = new Location("Sajmiste", "Novosadskog sajma", 30, "Novi Sad", "21000", "Srbija");
-        repository.save(location);
-    }
-
     @Test
     @Transactional
     @Rollback
@@ -49,7 +40,7 @@ public class LocationServiceTest {
         List<Location> locations = locationService.findAll();
 
         assertNotNull(locations);
-        assertFalse(locations.isEmpty());
+        assertThat(locations).hasSize(4);
     }
 
     @Test(expected = ObjectNotFoundException.class)
@@ -63,15 +54,15 @@ public class LocationServiceTest {
     @Transactional
     @Rollback
     public void testGetOne() throws ObjectNotFoundException {
-        Location location = locationService.getOne(1L);
+        Location location = locationService.getOne(2L);
 
         assertNotNull(location);
-        assertEquals((Long) 1L, location.getId());
-        assertEquals("Sajmiste", location.getName());
-        assertEquals("Novosadskog sajma", location.getStreetName());
+        assertEquals((Long) 2L, location.getId());
+        assertEquals("Sumice", location.getName());
+        assertEquals("Bulevar", location.getStreetName());
         assertEquals(30, location.getNumber());
-        assertEquals("Novi Sad", location.getCity());
-        assertEquals("21000", location.getZipCode());
+        assertEquals("Beograd", location.getCity());
+        assertEquals("11000", location.getZipCode());
         assertEquals("Srbija", location.getCountry());
         assertFalse(location.isDeleted());
     }
@@ -79,17 +70,16 @@ public class LocationServiceTest {
     @Test(expected = InvalidInputException.class)
     @Transactional
     @Rollback
-    public void testSameName() throws InvalidInputException {
-        LocationDTO dto = new LocationDTO("Kupaliste", "Kralja Petra",
+    public void testSameNameError() throws InvalidInputException {
+        LocationDTO dto = new LocationDTO("Sumice", "Kralja Petra",
                 32, "Novi Sad", "21000", "Srbija");
-        locationService.create(dto);
         locationService.create(dto);
     }
 
     @Test(expected = InvalidInputException.class)
     @Transactional
     @Rollback
-    public void testNoName() throws InvalidInputException {
+    public void testNoNameError() throws InvalidInputException {
         LocationDTO dto = new LocationDTO();
         dto.setCity("Novi Sad");
         dto.setCountry("Srbija");
@@ -103,12 +93,12 @@ public class LocationServiceTest {
     @Transactional
     @Rollback
     public void testCreateSuccessfull() throws InvalidInputException {
-        LocationDTO dto = new LocationDTO("Lokacija", "Kralja Petra",
+        LocationDTO dto = new LocationDTO("Kupaliste", "Kralja Petra",
                 32, "Novi Sad", "21000", "Srbija");
         Location location = locationService.create(dto);
 
         assertNotNull(location);
-        assertEquals("Lokacija", location.getName());
+        assertEquals("Kupaliste", location.getName());
         assertEquals("Kralja Petra", location.getStreetName());
         assertEquals(32, location.getNumber());
         assertEquals("Novi Sad", location.getCity());
@@ -133,11 +123,8 @@ public class LocationServiceTest {
     @Test
     @Transactional
     @Rollback
-    public void testDelete() throws ObjectNotFoundException {
-        Location loc = new Location("Kupaliste", "Kralja Petra",
-                32, "Novi Sad", "21000", "Srbija");
-        Location savedLocation = repository.save(loc);
-        boolean deleted = locationService.delete(savedLocation.getId());
+    public void testDelete() throws ObjectNotFoundException, InvalidInputException {
+        boolean deleted = locationService.delete(locationService.getOne(1L).getId());
 
         assertTrue(deleted);
     }
