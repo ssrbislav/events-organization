@@ -32,6 +32,16 @@ public class Event {
 
     private boolean deleted;
 
+    public Event(String name, Date startDate, Date endDate, EventType eventType, Location location, List<EventSector> eventSector) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.eventType = eventType;
+        this.location = location;
+        this.eventSector = eventSector;
+        this.deleted = false;
+    }
+
     public Event() {
         this.deleted = false;
     }

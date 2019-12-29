@@ -24,6 +24,12 @@ public class Hall {
 
     private boolean deleted;
 
+    public Hall(String name, Location location) {
+        this.name = name;
+        this.location = location;
+        this.deleted = false;
+    }
+
     public Hall() {
         this.deleted = false;
     }

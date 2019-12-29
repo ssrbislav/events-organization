@@ -31,6 +31,15 @@ public class Sector {
 
     private boolean deleted;
 
+    public Sector(String sectorMark, Long numOfRows, Long numOfColumns, Hall hall, List<EventSector> eventSectors) {
+        this.sectorMark = sectorMark;
+        this.numOfRows = numOfRows;
+        this.numOfColumns = numOfColumns;
+        this.hall = hall;
+        this.eventSectors = eventSectors;
+        this.deleted = false;
+    }
+
     public Sector() {
         this.deleted = false;
     }

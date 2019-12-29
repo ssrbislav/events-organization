@@ -46,7 +46,7 @@ public class HallServiceImpl implements IHallService {
             } catch (ObjectNotFoundException ex) {
                 throw new ObjectNotFoundException();
             }
-            if(dto.getName().equals("")) {
+            if(dto.getName().equals("") || dto.getName() == null) {
                 throw new InvalidInputException();
             }
             hall.get().setName(dto.getName());

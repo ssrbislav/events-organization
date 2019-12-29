@@ -33,6 +33,9 @@ public class LocationServiceImpl implements ILocationService {
     public Location create(LocationDTO dto) throws InvalidInputException {
         Optional<Location> location;
         try {
+            if (dto.getName() == null) {
+                throw new InvalidInputException("present");
+            }
             if (!locationRepository.findByNameAndDeletedIsFalse(dto.getName()).isPresent()) {
                 location = Optional.of(new Location());
                 location.get().setCity(dto.getCity());
@@ -41,12 +44,10 @@ public class LocationServiceImpl implements ILocationService {
                 location.get().setNumber(dto.getNumber());
                 location.get().setStreetName(dto.getStreetName());
                 location.get().setZipCode(dto.getZipCode());
-            } else if (dto.getName() == null) {
-                throw new InvalidInputException("present");
+                return locationRepository.save(location.get());
             } else {
                 throw new InvalidInputException("unique");
             }
-            return locationRepository.save(location.get());
         } catch (InvalidInputException ex) {
             if (ex.getMessage().contains("present")) {
                 throw new InvalidInputException("Name must be present!");

@@ -23,6 +23,8 @@ public class LocationDTO {
         this.country = country;
     }
 
+    public LocationDTO() {}
+
     public String getName() {
         return name;
     }

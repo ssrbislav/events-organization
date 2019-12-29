@@ -30,7 +30,7 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<Event> events;
 
-    public Location(String name, String streetName, int number, String city, String zipCode, String country, boolean deleted) {
+    public Location(String name, String streetName, int number, String city, String zipCode, String country) {
         this.name = name;
         this.streetName = streetName;
         this.number = number;
