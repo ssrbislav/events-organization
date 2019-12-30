@@ -27,6 +27,8 @@ public class EventDTO {
         this.locationId = locationId;
     }
 
+    public EventDTO() {}
+
     public String getName() {
         return name;
     }

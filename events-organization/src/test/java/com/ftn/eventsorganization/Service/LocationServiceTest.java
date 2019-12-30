@@ -4,7 +4,6 @@ import com.ftn.eventsorganization.DTO.LocationDTO;
 import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Location;
-import com.ftn.eventsorganization.repository.LocationRepository;
 import com.ftn.eventsorganization.service.ILocationService;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

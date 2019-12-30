@@ -5,3 +5,12 @@ insert into location(city, country, deleted, name, number, street_name, zip_code
 insert into hall(deleted, name, location_id) values(false, "Master centar", 1);
 insert into hall(deleted, name, location_id) values(false, "Hala Sumice", 2);
 insert into hall(deleted, name, location_id) values(false, "Hala Pionir Sabac", 3);
+
+
+insert into sector(deleted, num_of_columns, num_of_rows, sector_mark, hall_id) values(false, 4, 4, "SEC444", 1);
+insert into sector(deleted, num_of_columns, num_of_rows, sector_mark, hall_id) values(false, 2, 6, "SEC266", 2);
+insert into sector(deleted, num_of_columns, num_of_rows, sector_mark, hall_id) values(false, 3, 4, "SEC344", 3);
+
+insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-02-08", 1, "VIP Fest", "2020-02-02", 2);
+insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-05-08", 2, "Sajam poljoprivrede", "2020-05-02", 1);
+insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-10-15", 1, "Sabacki festival", "2020-10-10", 2);

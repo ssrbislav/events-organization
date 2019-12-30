@@ -6,7 +6,6 @@ import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Event;
 import com.ftn.eventsorganization.model.Location;
 import com.ftn.eventsorganization.repository.EventRepository;
-import com.ftn.eventsorganization.repository.LocationRepository;
 import com.ftn.eventsorganization.service.IEventService;
 import com.ftn.eventsorganization.service.ILocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +77,7 @@ public class EventServiceImpl implements IEventService {
                 throw new InvalidInputException("Event with the same name already exist!");
             }
         } catch (ObjectNotFoundException ex) {
-            throw new InvalidInputException("Location does not exist!");
+            throw new ObjectNotFoundException("Location does not exist!");
         }
     }
 

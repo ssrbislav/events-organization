@@ -13,6 +13,13 @@ public class SectorDTO {
     public SectorDTO() {
     }
 
+    public SectorDTO(String sectorMark, Long numOfRows, Long numOfColumns, Long hallId) {
+        this.sectorMark = sectorMark;
+        this.numOfRows = numOfRows;
+        this.numOfColumns = numOfColumns;
+        this.hallId = hallId;
+    }
+
     public String getSectorMark() {
         return sectorMark;
     }

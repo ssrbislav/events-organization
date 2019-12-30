@@ -47,7 +47,7 @@ public class SectorServiceImpl implements ISectorService {
                 throw new ObjectNotFoundException("Hall not found!", ex);
             }
             sector.get().setSectorMark(dto.getSectorMark());
-            if(dto.getNumOfColumns() == 0 || dto.getNumOfRows() == 0) {
+            if(dto.getNumOfColumns() <= 0 || dto.getNumOfRows() <= 0) {
                 throw new InvalidInputException();
             }
             sector.get().setNumOfColumns(dto.getNumOfColumns());
