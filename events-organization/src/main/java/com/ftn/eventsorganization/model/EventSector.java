@@ -34,6 +34,13 @@ public class EventSector {
     public EventSector() {
     }
 
+    public EventSector(Event event, Sector sector, double price, SectorType sectorType) {
+        this.event = event;
+        this.sector = sector;
+        this.price = price;
+        this.sectorType = sectorType;
+    }
+
     public Long getId() {
         return id;
     }

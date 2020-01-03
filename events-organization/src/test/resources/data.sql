@@ -14,3 +14,7 @@ insert into sector(deleted, num_of_columns, num_of_rows, sector_mark, hall_id) v
 insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-02-08", 1, "VIP Fest", "2020-02-02", 2);
 insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-05-08", 2, "Sajam poljoprivrede", "2020-05-02", 1);
 insert into event(deleted, end_date, event_type, name, start_date, location_id) values(false, "2020-10-15", 1, "Sabacki festival", "2020-10-10", 2);
+
+insert into event_sector(price, sector_type, event_id, sector_id) values(200.0, 1, 1, 2);
+insert into event_sector(price, sector_type, event_id, sector_id) values(330.0, 2, 1, 2);
+insert into event_sector(price, sector_type, event_id, sector_id) values(500.0, 0, 2, 3);

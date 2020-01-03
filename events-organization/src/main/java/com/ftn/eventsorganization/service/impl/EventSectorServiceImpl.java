@@ -62,7 +62,6 @@ public class EventSectorServiceImpl implements IEventSectorService {
         Optional<EventSector> es;
         try {
             if(repository.findByEventIdAndSectorId(dto.getEventId(), dto.getSectorId()).isPresent()) {
-                System.out.println("JEBiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii!!!!!!!!!!*********************************");
                 throw new ObjectNotFoundException("found");
             }
             es = Optional.of(new EventSector());
@@ -97,13 +96,12 @@ public class EventSectorServiceImpl implements IEventSectorService {
     }
 
     @Override
-    public EventSector update(EventSector location) throws ObjectNotFoundException {
+    public EventSector update(EventSector location) {
         return null;
     }
 
     @Override
-    public boolean delete(Long id) throws ObjectNotFoundException {
-        // OVAJ METOD NAM VEROVATNO NE TREBA
+    public boolean delete(Long id) {
         return true;
     }
 }
