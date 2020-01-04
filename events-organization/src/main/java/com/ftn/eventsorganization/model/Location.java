@@ -40,6 +40,17 @@ public class Location {
         this.deleted = false;
     }
 
+    public Location(Long id, String name, String streetName, int number, String city, String zipCode, String country) {
+        this.id = id;
+        this.name = name;
+        this.streetName = streetName;
+        this.number = number;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.country = country;
+        this.deleted = false;
+    }
+
     public Location() {
         this.deleted = false;
     }
