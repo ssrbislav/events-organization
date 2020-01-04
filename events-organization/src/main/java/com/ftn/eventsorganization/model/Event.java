@@ -35,13 +35,12 @@ public class Event {
 
     private boolean deleted;
 
-    public Event(String name, Date startDate, Date endDate, EventType eventType, Location location, List<EventSector> eventSector) {
+    public Event(String name, Date startDate, Date endDate, EventType eventType, Location location) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventType = eventType;
         this.location = location;
-        this.eventSector = eventSector;
         this.deleted = false;
     }
 
@@ -49,8 +48,13 @@ public class Event {
         this.deleted = false;
     }
 
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
