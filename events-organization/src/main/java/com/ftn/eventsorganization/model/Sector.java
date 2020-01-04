@@ -31,12 +31,11 @@ public class Sector {
 
     private boolean deleted;
 
-    public Sector(String sectorMark, Long numOfRows, Long numOfColumns, Hall hall, List<EventSector> eventSectors) {
+    public Sector(String sectorMark, Long numOfRows, Long numOfColumns, Hall hall) {
         this.sectorMark = sectorMark;
         this.numOfRows = numOfRows;
         this.numOfColumns = numOfColumns;
         this.hall = hall;
-        this.eventSectors = eventSectors;
         this.deleted = false;
     }
 
@@ -46,6 +45,10 @@ public class Sector {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSectorMark() {

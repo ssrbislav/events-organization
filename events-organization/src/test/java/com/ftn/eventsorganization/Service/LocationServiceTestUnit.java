@@ -34,13 +34,10 @@ public class LocationServiceTestUnit {
     @MockBean
     private LocationRepository locationRepository;
 
-
     @Before
     public void setUp() throws ObjectNotFoundException {
         Location location = new Location("Lokacija", "Gogoljeva", 30, "Novi Sad", "21000", "Srbija");
-        Optional<Location> oLocation = Optional.of(location);
-
-        Mockito.when(locationRepository.findByIdAndDeletedIsFalse(1L)).thenReturn(oLocation);
+        Mockito.when(locationRepository.findByIdAndDeletedIsFalse(1L)).thenReturn(Optional.of(location));
 
         List<Location> locations = new ArrayList<>();
         locations.add(location);
