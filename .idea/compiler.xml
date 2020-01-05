@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="events-organization" target="1.8" />
+      <module name="events-organization" target="10" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
