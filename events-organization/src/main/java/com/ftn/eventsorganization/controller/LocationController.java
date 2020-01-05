@@ -26,7 +26,6 @@ public class LocationController {
     public ResponseEntity<List<Location>> findAllLocations() {
 
         List<Location> locations = locationService.findAll();
-
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
 
@@ -34,36 +33,49 @@ public class LocationController {
     @GetMapping("/{id}")
     public ResponseEntity<Location> findOneById(@PathVariable Long id) throws ObjectNotFoundException {
 
-        Location location = locationService.getOne(id);
-
-        return new ResponseEntity<>(location, HttpStatus.OK);
+        try {
+            Location location = locationService.getOne(id);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Location> createLocation(@RequestBody LocationDTO dto) throws InvalidInputException {
 
-        Location location = locationService.create(dto);
-
-        return new ResponseEntity<>(location, HttpStatus.OK);
+        try {
+            Location location = locationService.create(dto);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Location> updateLocation(@RequestBody Location loc) throws ObjectNotFoundException {
 
-        Location location = locationService.update(loc);
-
-        return new ResponseEntity<>(location, HttpStatus.OK);
+        try {
+            Location location = locationService.update(loc);
+            return new ResponseEntity<>(location, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteLocation(@PathVariable Long id) throws ObjectNotFoundException {
 
-        boolean deleted = locationService.delete(id);
-
-        return new ResponseEntity<>("Location successfully deleted!", HttpStatus.OK);
+        try {
+            boolean deleted = locationService.delete(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
-
 }
