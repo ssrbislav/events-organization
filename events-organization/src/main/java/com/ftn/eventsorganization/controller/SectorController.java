@@ -25,7 +25,6 @@ public class SectorController {
     public ResponseEntity<List<Sector>> findAll() {
 
         List<Sector> sectors = sectorService.findAll();
-
         return new ResponseEntity<>(sectors, HttpStatus.OK);
     }
 
@@ -33,36 +32,52 @@ public class SectorController {
     @GetMapping("/{id}")
     public ResponseEntity<Sector> findById(@PathVariable Long id) throws ObjectNotFoundException {
 
-        Sector sector = sectorService.getOne(id);
-
-        return new ResponseEntity<>(sector, HttpStatus.OK);
+        try {
+            Sector sector = sectorService.getOne(id);
+            return new ResponseEntity<>(sector, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Sector> create(@RequestBody SectorDTO dto) throws InvalidInputException, ObjectNotFoundException {
 
-        Sector sector = sectorService.create(dto);
-
-        return new ResponseEntity<>(sector, HttpStatus.OK);
+        try {
+            Sector sector = sectorService.create(dto);
+            return new ResponseEntity<>(sector, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Sector> update(@RequestBody Sector sec) throws InvalidInputException, ObjectNotFoundException {
 
-        Sector sector = sectorService.update(sec);
-
-        return new ResponseEntity<>(sector, HttpStatus.OK);
+        try {
+            Sector sector = sectorService.update(sec);
+            return new ResponseEntity<>(sector, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws ObjectNotFoundException {
 
-        boolean deleted = sectorService.delete(id);
-
-        return new ResponseEntity<>("Sector deleted successfully", HttpStatus.OK);
+        try {
+            boolean deleted = sectorService.delete(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 
 }
