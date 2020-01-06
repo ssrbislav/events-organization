@@ -19,7 +19,7 @@ public interface IEventSectorService {
 
     EventSector create(EventSectorDTO es) throws InvalidInputException, ObjectNotFoundException;
 
-    EventSector update(EventSector es) throws ObjectNotFoundException;
+    EventSector update(EventSector es) throws ObjectNotFoundException, InvalidInputException;
 
     boolean delete(Long id) throws ObjectNotFoundException;
 }

@@ -139,7 +139,7 @@ public class EventServiceTestUnit {
     }
 
     @Test
-    public void testUpdate() throws ObjectNotFoundException {
+    public void testUpdate() throws ObjectNotFoundException, InvalidInputException {
         Event event = eventService.getOne(3L);
         event.setName("Dogadjaj");
         Event updateEvent = eventService.update(event);

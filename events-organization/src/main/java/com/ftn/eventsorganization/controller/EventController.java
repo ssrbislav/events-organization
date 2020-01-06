@@ -25,7 +25,6 @@ public class EventController {
     public ResponseEntity<?> findAll() {
 
         List<Event> events = eventService.findAll();
-
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
@@ -33,36 +32,51 @@ public class EventController {
     @GetMapping("/{id}")
     public ResponseEntity<Event> findOne(@PathVariable Long id) throws ObjectNotFoundException {
 
-        Event event = eventService.getOne(id);
-
-        return new ResponseEntity<>(event, HttpStatus.OK);
+        try {
+            Event event = eventService.getOne(id);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<Event> create(@RequestBody EventDTO dto) throws InvalidInputException, ObjectNotFoundException {
 
-        Event event = eventService.create(dto);
-
-        return new ResponseEntity<>(event, HttpStatus.OK);
+        try {
+            Event event = eventService.create(dto);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Event> update(@RequestBody Event ev) throws ObjectNotFoundException {
 
-        Event event = eventService.update(ev);
-
-        return new ResponseEntity<>(event, HttpStatus.OK);
+        try {
+            Event event = eventService.update(ev);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws ObjectNotFoundException {
 
-        boolean deleted = eventService.delete(id);
-
-        return new ResponseEntity<>("Event deleted successfully!", HttpStatus.OK);
+        try {
+            boolean deleted = eventService.delete(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
-
 }

@@ -25,7 +25,6 @@ public class EventSectorController {
     public ResponseEntity<List<EventSector>> findAll() {
 
         List<EventSector> eventSectors = service.findAll();
-
         return new ResponseEntity<>(eventSectors, HttpStatus.OK);
     }
 
@@ -33,34 +32,45 @@ public class EventSectorController {
     @GetMapping("/{id}")
     public ResponseEntity<EventSector> findById(@PathVariable Long id) throws ObjectNotFoundException {
 
-        EventSector es = service.getOne(id);
-
-        return new ResponseEntity<>(es, HttpStatus.OK);
+        try {
+            EventSector es = service.getOne(id);
+            return new ResponseEntity<>(es, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<EventSector> create(@RequestBody EventSectorDTO dto) throws InvalidInputException, ObjectNotFoundException {
 
-        EventSector es = service.create(dto);
-
-        return new ResponseEntity<>(es, HttpStatus.OK);
+        try {
+            EventSector es = service.create(dto);
+            return new ResponseEntity<>(es, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<EventSector> update(@RequestBody EventSector eventSector) throws InvalidInputException, ObjectNotFoundException {
 
-        EventSector es = service.update(eventSector);
-
-        return new ResponseEntity<>(es, HttpStatus.OK);
+        try {
+            EventSector es = service.update(eventSector);
+            return new ResponseEntity<>(es, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws InvalidInputException, ObjectNotFoundException {
-
-        //boolean deleted = service.delete(id);
 
         return new ResponseEntity<>("Method not implemented!", HttpStatus.OK);
     }

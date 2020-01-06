@@ -96,7 +96,9 @@ public class EventSectorServiceImpl implements IEventSectorService {
     }
 
     @Override
-    public EventSector update(EventSector location) {
+    public EventSector update(EventSector location) throws InvalidInputException, ObjectNotFoundException {
+
+        // THIS SHOULD BE IMPLEMENTED!!!
         return null;
     }
 

@@ -14,6 +14,6 @@ public interface IEventService {
     List<Event> findAll();
     Event getOne(Long id) throws ObjectNotFoundException;
     Event create(EventDTO dto) throws ObjectNotFoundException, InvalidInputException;
-    Event update(Event event) throws ObjectNotFoundException;
+    Event update(Event event) throws InvalidInputException, ObjectNotFoundException;
     boolean delete(Long id) throws ObjectNotFoundException;
 }

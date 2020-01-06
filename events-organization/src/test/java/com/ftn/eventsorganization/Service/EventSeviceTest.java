@@ -128,7 +128,7 @@ public class EventSeviceTest {
     }
 
     @Test
-    public void updateEvent() throws ObjectNotFoundException {
+    public void updateEvent() throws ObjectNotFoundException, InvalidInputException {
         Event event = eventService.getOne(1L);
         event.setEventType(EventType.CONCERT);
         event.setName("VIP Concert");
