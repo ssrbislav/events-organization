@@ -1,6 +1,7 @@
 package com.ftn.eventsorganization.controller;
 
 import com.ftn.eventsorganization.DTO.HallDTO;
+import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Hall;
 import com.ftn.eventsorganization.service.IHallService;
@@ -24,7 +25,6 @@ public class HallController {
     public ResponseEntity<List<Hall>> findAll() {
 
         List<Hall> halls = hallService.findAll();
-
         return new ResponseEntity<>(halls, HttpStatus.OK);
     }
 
@@ -32,35 +32,48 @@ public class HallController {
     @GetMapping("/{id}")
     public ResponseEntity<Hall> findById(@PathVariable Long id) throws ObjectNotFoundException {
 
-        Hall hall = hallService.getOne(id);
-
-        return new ResponseEntity<>(hall, HttpStatus.OK);
+        try {
+            Hall hall = hallService.getOne(id);
+            return new ResponseEntity<>(hall, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/create")
-    public ResponseEntity<Hall> create(@RequestBody HallDTO dto) throws Exception {
+    public ResponseEntity<Hall> create(@RequestBody HallDTO dto) throws InvalidInputException, ObjectNotFoundException {
 
-        Hall hall = hallService.create(dto);
-
-        return new ResponseEntity<>(hall, HttpStatus.OK);
+        try {
+            Hall hall = hallService.create(dto);
+            return new ResponseEntity<>(hall, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        } catch (InvalidInputException ex) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update")
     public ResponseEntity<Hall> update(@RequestBody Hall hallUpdate) throws ObjectNotFoundException {
-
-        Hall hall = hallService.update(hallUpdate);
-
-        return new ResponseEntity<>(hall, HttpStatus.OK);
+        try {
+            Hall hall = hallService.update(hallUpdate);
+            return new ResponseEntity<>(hall, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws ObjectNotFoundException {
 
-        boolean deleted = hallService.delete(id);
-
-        return new ResponseEntity<>("Hall successfully deleted!", HttpStatus.OK);
+        try {
+            boolean deleted = hallService.delete(id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (ObjectNotFoundException ex) {
+            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -1,7 +1,8 @@
 package com.ftn.eventsorganization.controller;
 
-import com.ftn.eventsorganization.DTO.LocationDTO;
+import com.ftn.eventsorganization.DTO.HallDTO;
 import com.ftn.eventsorganization.TestUtil;
+import com.ftn.eventsorganization.model.Hall;
 import com.ftn.eventsorganization.model.Location;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
@@ -27,9 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class LocationControllerTest {
+public class HallControllerTest {
 
-    private static final String URL_PREFIX = "/api/location";
+    private static final String URL_PREFIX = "/api/hall";
     private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(), MediaType.APPLICATION_JSON.getSubtype());
     private MockMvc mockMvc;
 
@@ -48,29 +49,23 @@ public class LocationControllerTest {
                 .andExpect(content().contentType(contentType))
                 .andExpect(jsonPath("$", hasSize(3)))
                 .andExpect(jsonPath("$.[*].id").value(CoreMatchers.hasItem(1)))
-                .andExpect(jsonPath("$.[*].name").value(CoreMatchers.hasItem("Sajam")))
-                .andExpect(jsonPath("$.[*].streetName").value(CoreMatchers.hasItem("Kralja Petra")))
-                .andExpect(jsonPath("$.[*].number").value(CoreMatchers.hasItem(30)))
-                .andExpect(jsonPath("$.[*].city").value(CoreMatchers.hasItem("Novi Sad")))
-                .andExpect(jsonPath("$.[*].zipCode").value(CoreMatchers.hasItem("21000")));
+                .andExpect(jsonPath("$.[*].name").value(CoreMatchers.hasItem("Master centar")))
+                .andExpect(jsonPath("$.[*].deleted").value(CoreMatchers.hasItem(false)));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void getOneTest() throws Exception {
-        mockMvc.perform(get(URL_PREFIX + "/2")).andExpect(status().isOk())
+    public void getOne() throws Exception {
+        mockMvc.perform(get(URL_PREFIX + "/1")).andExpect(status().isOk())
                 .andExpect(content().contentType(contentType))
-                .andExpect(jsonPath("$.id").value(2))
-                .andExpect(jsonPath("$.name").value("Sumice"))
-                .andExpect(jsonPath("$.streetName").value("Bulevar"))
-                .andExpect(jsonPath("$.number").value(30))
-                .andExpect(jsonPath("$.city").value("Beograd"))
-                .andExpect(jsonPath("$.zipCode").value("11000"));
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.name").value("Master centar"))
+                .andExpect(jsonPath("$.deleted").value("false"));
     }
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    public void getOneTestNoLocation() throws Exception {
+    public void getOneTestNoHall() throws Exception {
         mockMvc.perform(get(URL_PREFIX + "/55"))
                 .andExpect(status().isNotFound());
     }
@@ -80,9 +75,8 @@ public class LocationControllerTest {
     @Rollback(true)
     @WithMockUser(roles = "ADMIN")
     public void createTest() throws Exception {
-        LocationDTO locationDTO = new LocationDTO("Loki", "Kralja Petra",
-                32, "Novi Sad", "21000", "Srbija");
-        String json = TestUtil.json(locationDTO);
+        HallDTO hallDTO = new HallDTO("Ime", 2L);
+        String json = TestUtil.json(hallDTO);
         this.mockMvc.perform(post(URL_PREFIX + "/create").contentType(contentType).content(json))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(contentType));
@@ -92,26 +86,36 @@ public class LocationControllerTest {
     @Transactional
     @Rollback(true)
     @WithMockUser(roles = "ADMIN")
-    public void createBadRequestTest() throws Exception {
-        LocationDTO locationDTO = new LocationDTO("Sumice", "Kralja Petra",
-                32, "Novi Sad", "21000", "Srbija");
-        String json = TestUtil.json(locationDTO);
+    public void createTestNoName() throws Exception {
+        HallDTO hallDTO = new HallDTO("", 2L);
+        String json = TestUtil.json(hallDTO);
         this.mockMvc.perform(post(URL_PREFIX + "/create").contentType(contentType).content(json))
                 .andExpect(status().isBadRequest());
-
     }
 
     @Test
     @Transactional
     @Rollback(true)
     @WithMockUser(roles = "ADMIN")
-    public void updateNotFoundTest() throws Exception {
-        Location location = new Location(1L, "Sajam2", "Kralja",
-                32, "Novi Sad", "21000", "Srbija");
-        String json = TestUtil.json(location);
+    public void createTestNoLocation() throws Exception {
+        HallDTO hallDTO = new HallDTO("Ime", 26L);
+        String json = TestUtil.json(hallDTO);
+        this.mockMvc.perform(post(URL_PREFIX + "/create").contentType(contentType).content(json))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @Transactional
+    @Rollback(true)
+    @WithMockUser(roles = "ADMIN")
+    public void updateTest() throws Exception {
+        Location location = new Location(1L, "Sajam", "Kralja Petra",
+                30, "Novi Sad", "21000", "Srbija");
+        Hall hall = new Hall("Im3e", location);
+        hall.setId(1L);
+        String json = TestUtil.json(hall);
         this.mockMvc.perform(put(URL_PREFIX + "/update").contentType(contentType).content(json))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(contentType));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -119,7 +123,7 @@ public class LocationControllerTest {
     @Rollback(true)
     @WithMockUser(roles = "ADMIN")
     public void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(URL_PREFIX + "/delete/1"))
+        this.mockMvc.perform(delete(URL_PREFIX + "/delete/2"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
@@ -128,7 +132,7 @@ public class LocationControllerTest {
     @Transactional
     @Rollback(true)
     @WithMockUser(roles = "ADMIN")
-    public void deleteTestNoLocation() throws Exception {
+    public void deleteTestNoHall() throws Exception {
         this.mockMvc.perform(delete(URL_PREFIX + "/delete/100"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string("false"));
