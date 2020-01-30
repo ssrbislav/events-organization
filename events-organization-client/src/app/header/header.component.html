@@ -1,14 +1,18 @@
 <header>
   <div class="content">
     <div class="logotip">
-      <div class="logo"></div>
+      <div class="logo" routerLink=""></div>
       <div class="heading">EVENTS <br> ORGANIZATION</div>
     </div>
 
     <div class="navigation">
-      <ul>
-        <li>LOGIN</li>
+      <ul *ngIf="(showView) == ''">
+        <li routerLink="login">LOGIN </li>
         <li>REGISTRATION</li>
+      </ul>
+      <ul *ngIf="(showView) == 'ROLE_USER'">
+        <li>USERNAME</li>
+        <li>LOGOUT</li>
       </ul>
     </div>
   </div>

@@ -26,6 +26,7 @@ header {
   width: 90px;
   background: url("../../assets/images/logo.png") center center;
   background-size: cover;
+  cursor: pointer;
 }
 
 .heading {
