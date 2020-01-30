@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="picture"></div>
+  <div class="login-form">
+    <h3>REGISTRATION</h3>
+    <br>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <br>
+        <input type="text" id="user" name="username" [(ngModel)]="form.username" #username="ngModel" required
+          placeholder="USERNAME" />
+        <div class="error" *ngIf="f.submitted && username.invalid">
+          <div *ngIf="username.errors.required">Username is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <input type="email" id="email" name="email" [(ngModel)]="form.email" #email="ngModel" required
+          placeholder="EMAIL" />
+        <div class="error" *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">Email is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" id="pass" name="password" minlength="5" [(ngModel)]="form.password" #password="ngModel"
+          required placeholder="PASSWORD" />
+
+        <div class="error" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="pass2" name="passwordRepeat" [ngModel]="form.passwordRepeat"
+          #passwordRepeat="ngModel" (ngModelChange)="checkSame($event)" required placeholder="REPEATE PASSWORD" />
+        <div *ngIf="(errorMessage) != ''" class="error">
+          <div>{{errorMessage}}</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="form.firstName" #firstName="ngModel" required
+          placeholder="FIRST NAME" />
+        <div class="error" *ngIf="f.submitted && firstName.invalid">
+          <div *ngIf="firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="form.lastName" #lastName="ngModel" required
+          placeholder="LAST NAME" />
+        <div class="error" *ngIf="f.submitted && lastName.invalid">
+          <div *ngIf="lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <input type="text" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="form.dateOfBirth" #dateOfBirth="ngModel"
+          required placeholder="DATE OF BIRTH" />
+        <div class="error" *ngIf="f.submitted && dateOfBirth.invalid">
+          <div *ngIf="dateOfBirth.errors.required">Date Of Birth is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <br>
+        <input type="text" id="address" name="address" minlength="5" [(ngModel)]="form.address" #address="ngModel"
+          required placeholder="ADDRESS" />
+        <div class="error" *ngIf="f.submitted && address.invalid">
+          <div *ngIf="address.errors.required">Address is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="submitbtn">LOG IN</button>
+        <button class="cancelbtn" type="button" routerLink="">CANCEL</button>
+        <div class="error" *ngIf="f.submitted && isLoginFailed">
+          Registration error -> Wrong inputs!
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
