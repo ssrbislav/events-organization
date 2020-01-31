@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { TokenStorageService } from "../auth/ttoken-storage.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-header",
@@ -7,8 +9,35 @@ import { Component, OnInit } from "@angular/core";
 })
 export class HeaderComponent implements OnInit {
   showView = "";
+  private roles: string[];
 
-  constructor() {}
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private router: Router
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAuthFromStorage();
+  }
+
+  getAuthFromStorage() {
+    if (this.tokenStorage.getToken()) {
+      this.roles = this.tokenStorage.getAuthorities();
+      this.roles.every(role => {
+        this.showView = "visitor";
+        if (role === "ROLE_ADMIN") {
+          this.showView = "admin";
+          return true;
+        } else if (role === "ROLE_VISITOR") {
+          this.showView = "visitor";
+          return true;
+        }
+      });
+    }
+  }
+
+  logout() {
+    window.sessionStorage.clear();
+    location.reload();
+  }
 }

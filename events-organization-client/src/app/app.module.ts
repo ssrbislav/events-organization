@@ -9,7 +9,19 @@ import { HeaderComponent } from "./header/header.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { MatDatepickerModule, MatFormFieldModule } from "@angular/material";
+import {
+  MatDatepickerModule,
+  MatFormFieldModule,
+  MatNativeDateModule,
+  MatInputModule
+} from "@angular/material";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { RouterModule } from "@angular/router";
+import {
+  AuthInterceptor,
+  httpInterceptorProviders
+} from "./auth/auth-interceptor";
+import { RoleGuardService } from "./auth/role-guard.service";
 
 @NgModule({
   declarations: [
@@ -24,10 +36,22 @@ import { MatDatepickerModule, MatFormFieldModule } from "@angular/material";
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+    RouterModule,
     MatDatepickerModule,
-    MatFormFieldModule
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
-  providers: [],
+  providers: [
+    RoleGuardService,
+    httpInterceptorProviders,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

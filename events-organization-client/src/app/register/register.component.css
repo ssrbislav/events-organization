@@ -53,7 +53,13 @@ button {
 }
 
 #user:focus,
-#pass:focus {
+#pass:focus,
+#pass2:focus,
+#dateOfBirth:focus,
+#email:focus,
+#firstName:focus,
+#lastName:focus,
+#address:focus {
   border-bottom: 1px solid #fc4f51;
 }
 
@@ -69,7 +75,7 @@ h3,
   padding-top: 20px;
   font-size: 30px;
   font-weight: 200;
-  margin-top: 100px;
+  margin-top: 10px;
 }
 
 p {

@@ -53,14 +53,12 @@
           <div *ngIf="lastName.errors.required">Last Name is required</div>
         </div>
       </div>
-      <div class="form-group">
-        <br>
-        <input type="text" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="form.dateOfBirth" #dateOfBirth="ngModel"
-          required placeholder="DATE OF BIRTH" />
-        <div class="error" *ngIf="f.submitted && dateOfBirth.invalid">
-          <div *ngIf="dateOfBirth.errors.required">Date Of Birth is required</div>
-        </div>
-      </div>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="DATE OF BIRTH" [min]="minDate" [max]="maxDate"
+          id="dateOfBirth" name="dateOfBirth" [(ngModel)]="form.dateOfBirth" [value]="form.dateOfBirth">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <div class="form-group">
         <br>
         <input type="text" id="address" name="address" minlength="5" [(ngModel)]="form.address" #address="ngModel"
@@ -70,7 +68,15 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="submitbtn">LOG IN</button>
+        <br>
+        <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel"
+          required placeholder="DATE OF BIRTH" />
+        <div class="error" *ngIf="f.submitted && phoneNumber.invalid">
+          <div *ngIf="phoneNumber.errors.required">Phone number is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="submitbtn">REGISTER</button>
         <button class="cancelbtn" type="button" routerLink="">CANCEL</button>
         <div class="error" *ngIf="f.submitted && isLoginFailed">
           Registration error -> Wrong inputs!

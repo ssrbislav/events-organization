@@ -10,9 +10,9 @@
         <li routerLink="login">LOGIN </li>
         <li routerLink="register">REGISTRATION</li>
       </ul>
-      <ul *ngIf="(showView) == 'ROLE_USER'">
+      <ul *ngIf="(showView) == 'admin'">
         <li>USERNAME</li>
-        <li>LOGOUT</li>
+        <li (click)="logout()">LOGOUT</li>
       </ul>
     </div>
   </div>
