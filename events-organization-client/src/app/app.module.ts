@@ -22,6 +22,7 @@ import {
   httpInterceptorProviders
 } from "./auth/auth-interceptor";
 import { RoleGuardService } from "./auth/role-guard.service";
+import { AdminComponent } from "./admin/admin.component";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RoleGuardService } from "./auth/role-guard.service";
     MainPageComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
