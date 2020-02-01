@@ -26,3 +26,14 @@ h3 {
   color: #fff;
   background-color: rgb(31, 31, 31);
 }
+
+
+@media (max-width: 1500px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .grid-item {
+    width: 100%;
+  }
+}

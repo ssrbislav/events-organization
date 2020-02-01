@@ -13,7 +13,16 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatNativeDateModule,
-  MatInputModule
+  MatInputModule,
+  MatSortModule,
+  MatTableModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatDialogModule
 } from "@angular/material";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
@@ -51,7 +60,16 @@ import { LocationListComponent } from "./admin/location-list/location-list.compo
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     RoleGuardService,

@@ -1,3 +1,9 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 h3 {
   padding: 10px;
   margin: 0;
@@ -5,4 +11,16 @@ h3 {
   text-align: center;
   color: #fff;
   background-color: rgb(31, 31, 31);
+}
+
+table {
+  text-align: left;
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 90%;
+}
+
+button:hover {
+  background-color: rgb(31, 31, 31);
+  color: #fff;
 }
