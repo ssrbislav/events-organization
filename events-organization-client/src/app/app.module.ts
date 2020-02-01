@@ -23,6 +23,10 @@ import {
 } from "./auth/auth-interceptor";
 import { RoleGuardService } from "./auth/role-guard.service";
 import { AdminComponent } from "./admin/admin.component";
+import { EventListComponent } from "./admin/event-list/event-list.component";
+import { SectorListComponent } from "./admin/sector-list/sector-list.component";
+import { HallListComponent } from "./admin/hall-list/hall-list.component";
+import { LocationListComponent } from "./admin/location-list/location-list.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { AdminComponent } from "./admin/admin.component";
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    EventListComponent,
+    SectorListComponent,
+    HallListComponent,
+    LocationListComponent
   ],
   imports: [
     BrowserModule,
