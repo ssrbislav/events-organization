@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
+import { RoleGuardService } from "./auth/role-guard.service";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/main", pathMatch: "full" },
@@ -21,11 +22,19 @@ const appRoutes: Routes = [
   },
   {
     path: "admin",
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_ADMIN"
+    }
   },
   {
     path: "events",
-    component: MainPageComponent
+    component: MainPageComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_VISITOR"
+    }
   }
 ];
 
