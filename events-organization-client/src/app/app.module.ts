@@ -35,7 +35,7 @@ import {
 import { RoleGuardService } from "./auth/role-guard.service";
 import { AdminComponent } from "./admin/admin.component";
 import { EventListComponent } from "./admin/event-list/event-list.component";
-import { SectorListComponent } from "./admin/sector-list/sector-list.component";
+import { SectorListComponent } from "./admin/location-list/hall-list/sector-list/sector-list.component";
 import { HallListComponent } from "./admin/location-list/hall-list/hall-list.component";
 import { LocationListComponent } from "./admin/location-list/location-list.component";
 
@@ -73,7 +73,7 @@ import { LocationListComponent } from "./admin/location-list/location-list.compo
     MatDialogModule,
     MatButtonModule
   ],
-  entryComponents: [HallListComponent],
+  entryComponents: [HallListComponent, SectorListComponent],
   providers: [
     RoleGuardService,
     httpInterceptorProviders,
