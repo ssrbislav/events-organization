@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
-import { Location } from "../model/location.model";
+import { Location, LocationDTO } from "../model/location.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -16,5 +16,13 @@ export class LocationService {
 
   getLocations() {
     return this.http.get<Location[]>(this.url);
+  }
+
+  getLocation(id: number) {
+    return this.http.get<Location>(`${this.url}/${id}`);
+  }
+
+  createLocation(data: LocationDTO) {
+    return this.http.post<Location>(`${this.url}/create`, data, httpOptions);
   }
 }

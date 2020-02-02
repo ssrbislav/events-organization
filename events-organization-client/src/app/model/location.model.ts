@@ -6,20 +6,19 @@ export class LocationDTO {
   private zipCode: string;
   private country: string;
 
-  constructor(
-    name: string,
-    streetName: string,
-    number: number,
-    city: string,
-    zipCode: string,
-    country: string
-  ) {
-    this.name = name;
-    this.streetName = streetName;
-    this.number = number;
-    this.city = city;
-    this.zipCode = zipCode;
-    this.country = country;
+  constructor() // name: string,
+  // streetName: string,
+  // number: number,
+  // city: string,
+  // zipCode: string,
+  // country: string
+  {
+    // this.name = name;
+    // this.streetName = streetName;
+    // this.number = number;
+    // this.city = city;
+    // this.zipCode = zipCode;
+    // this.country = country;
   }
 }
 

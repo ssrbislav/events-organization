@@ -3,6 +3,7 @@ import { LocationService } from "src/app/services/location.service";
 import { Location } from "src/app/model/location.model";
 import { MatDialogConfig, MatDialog } from "@angular/material";
 import { HallListComponent } from "./hall-list/hall-list.component";
+import { AddLocationComponent } from "./add-location/add-location.component";
 
 @Component({
   selector: "app-location-list",
@@ -38,5 +39,17 @@ export class LocationListComponent implements OnInit {
     };
 
     const dialog = this.dialog.open(HallListComponent, dialogConfig);
+  }
+
+  addNewLocation() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1
+    };
+
+    const dialog = this.dialog.open(AddLocationComponent, dialogConfig);
   }
 }
