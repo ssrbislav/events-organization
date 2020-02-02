@@ -6,15 +6,15 @@
 }
 
 .grid-item {
-  width: 50%;
-  height: 500px;
+  width: 100%;
+  min-height: 300px;
   border-right: 3px solid rgb(71, 71, 71);
   overflow: auto;
+  padding-bottom: 10px;
 }
 
 .row {
-  display: flex;
-  flex-direction: row;
+
   border-bottom: 3px solid rgb(71, 71, 71);
 }
 
@@ -28,12 +28,4 @@ h3 {
 }
 
 
-@media (max-width: 1500px) {
-  .row {
-    flex-direction: column;
-  }
-
-  .grid-item {
-    width: 100%;
-  }
-}
+@media (max-width: 1500px) {}
