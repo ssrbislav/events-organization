@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogConfig, MatDialog } from "@angular/material";
 import { HallService } from "src/app/services/hall.service";
 import { Hall } from "src/app/model/hall.model";
 import { SectorListComponent } from "./sector-list/sector-list.component";
+import { AddHallComponent } from "./add-hall/add-hall.component";
 
 @Component({
   selector: "app-hall-list",
@@ -10,6 +11,7 @@ import { SectorListComponent } from "./sector-list/sector-list.component";
   styleUrls: ["./hall-list.component.css"]
 })
 export class HallListComponent implements OnInit {
+  private locationId: number;
   private halls: Hall[];
 
   constructor(
@@ -19,6 +21,7 @@ export class HallListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.locationId = this.data.location.id;
     this.halls = this.data.location.halls;
   }
 
@@ -32,5 +35,17 @@ export class HallListComponent implements OnInit {
     };
 
     const dialog = this.dialog.open(SectorListComponent, dialogConfig);
+  }
+
+  addNewHall(locationId: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      id: 1,
+      locationId
+    };
+
+    const dialog = this.dialog.open(AddHallComponent, dialogConfig);
   }
 }

@@ -1,13 +1,10 @@
 import { stringify } from "querystring";
 
 export class HallDTO {
-  private name: string;
-  private locationId: number;
+  name: string;
+  locationId: number;
 
-  constructor(name: string, locationId: number) {
-    this.name = name;
-    this.locationId = locationId;
-  }
+  constructor() {}
 }
 
 export class Hall {

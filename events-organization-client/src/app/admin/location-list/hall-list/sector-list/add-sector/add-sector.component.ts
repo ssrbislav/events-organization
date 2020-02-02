@@ -22,7 +22,7 @@ export class AddSectorComponent implements OnInit {
   onSubmit() {
     this.sector.hallId = this.data.hallId;
 
-    this.sectorService.addNewSector(this.sector).subscribe(
+    this.sectorService.createSector(this.sector).subscribe(
       data => {
         alert("Sector succesfully created!");
         this.dialogRef.close();

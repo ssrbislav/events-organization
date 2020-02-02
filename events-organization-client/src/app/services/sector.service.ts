@@ -22,7 +22,7 @@ export class SectorService {
     return this.http.get<Sector>(`${this.url}/${id}`);
   }
 
-  addNewSector(data: SectorDTO) {
+  createSector(data: SectorDTO) {
     return this.http.post<Sector>(`${this.url}/create`, data, httpOptions);
   }
 
