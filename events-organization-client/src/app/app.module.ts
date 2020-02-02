@@ -22,7 +22,9 @@ import {
   MatOptionModule,
   MatSelectModule,
   MatButtonModule,
-  MatDialogModule
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+  MatDialogRef
 } from "@angular/material";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
@@ -34,7 +36,7 @@ import { RoleGuardService } from "./auth/role-guard.service";
 import { AdminComponent } from "./admin/admin.component";
 import { EventListComponent } from "./admin/event-list/event-list.component";
 import { SectorListComponent } from "./admin/sector-list/sector-list.component";
-import { HallListComponent } from "./admin/hall-list/hall-list.component";
+import { HallListComponent } from "./admin/location-list/hall-list/hall-list.component";
 import { LocationListComponent } from "./admin/location-list/location-list.component";
 
 @NgModule({
@@ -71,9 +73,12 @@ import { LocationListComponent } from "./admin/location-list/location-list.compo
     MatDialogModule,
     MatButtonModule
   ],
+  entryComponents: [HallListComponent],
   providers: [
     RoleGuardService,
     httpInterceptorProviders,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

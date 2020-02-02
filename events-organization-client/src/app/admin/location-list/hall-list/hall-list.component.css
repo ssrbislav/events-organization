@@ -1,11 +1,10 @@
 .container {
-  width: 100%;
   margin: 0;
   padding: 0;
+  max-width: 100%;
 }
 
 .wrapper {
-  width: 90%;
   margin: 0 auto;
 }
 
@@ -20,7 +19,6 @@ h3 {
 
 table {
   text-align: left;
-
   margin-top: 20px;
   width: 100%;
 }
@@ -30,11 +28,15 @@ table {
   color: #fff;
 }
 
+
 button:hover {
   background-color: rgb(31, 31, 31);
   color: #fff;
 }
 
-.new_loc {
+.close_btn {
+  background-color: #fe7451;
+  color: #fff;
   margin-top: 10px;
+  margin-left: 10px;
 }
