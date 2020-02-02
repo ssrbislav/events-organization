@@ -38,6 +38,8 @@ import { EventListComponent } from "./admin/event-list/event-list.component";
 import { SectorListComponent } from "./admin/location-list/hall-list/sector-list/sector-list.component";
 import { HallListComponent } from "./admin/location-list/hall-list/hall-list.component";
 import { LocationListComponent } from "./admin/location-list/location-list.component";
+import { AddSectorComponent } from "./admin/location-list/hall-list/sector-list/add-sector/add-sector.component";
+import { EditSectorComponent } from "./admin/location-list/hall-list/sector-list/edit-sector/edit-sector.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { LocationListComponent } from "./admin/location-list/location-list.compo
     EventListComponent,
     SectorListComponent,
     HallListComponent,
-    LocationListComponent
+    LocationListComponent,
+    AddSectorComponent,
+    EditSectorComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +77,12 @@ import { LocationListComponent } from "./admin/location-list/location-list.compo
     MatDialogModule,
     MatButtonModule
   ],
-  entryComponents: [HallListComponent, SectorListComponent],
+  entryComponents: [
+    HallListComponent,
+    SectorListComponent,
+    AddSectorComponent,
+    EditSectorComponent
+  ],
   providers: [
     RoleGuardService,
     httpInterceptorProviders,

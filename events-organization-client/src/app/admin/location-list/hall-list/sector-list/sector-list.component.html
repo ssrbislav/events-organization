@@ -7,6 +7,7 @@
           <th class="head" scope="col">SECTOR MARK</th>
           <th class="head" scope="col">NUM OF ROWS</th>
           <th class="head" scope="col">NUM OF COLUMNS</th>
+          <th class="head" scope="col">EDIT</th>
           <th class="head" scope="col">DELETE</th>
         </tr>
       </thead>
@@ -16,6 +17,11 @@
           <td>{{sector.numOfRows}}</td>
           <td>{{sector.numOfColumns}}</td>
           <td id="delete">
+            <button mat-raised-button (click)="editSector(sector)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
             <button mat-raised-button class="delete_btn">
               <mat-icon>delete</mat-icon>
             </button>
@@ -23,7 +29,7 @@
         </tr>
         <mat-divider></mat-divider>
     </table>
-    <button class="new_loc" mat-raised-button>ADD NEW SECTOR </button>
+    <button class="new_loc" mat-raised-button (click)="addNewSector(hall.id)">ADD NEW SECTOR </button>
     <button class="close_btn" mat-raised-button mat-dialog-close>CLOSE </button>
   </div>
 </div>
