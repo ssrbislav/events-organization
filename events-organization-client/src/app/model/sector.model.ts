@@ -1,19 +1,18 @@
 export class SectorDTO {
-  private sectorMark: string;
-  private numOfRows: number;
-  private numOfColumns: number;
-  private hallId: number;
+  sectorMark: string;
+  numOfRows: number;
+  numOfColumns: number;
+  hallId: number;
 
-  constructor(
-    sectorMark: string,
-    numOfRows: number,
-    numOfColumns: number,
-    hallId: number
-  ) {
-    this.sectorMark = sectorMark;
-    this.numOfRows = numOfRows;
-    this.numOfColumns = numOfColumns;
-    this.hallId = hallId;
+  constructor() // sectorMark: string,
+  // numOfRows: number,
+  // numOfColumns: number,
+  // hallId: number
+  {
+    // this.sectorMark = sectorMark;
+    // this.numOfRows = numOfRows;
+    // this.numOfColumns = numOfColumns;
+    // this.hallId = hallId;
   }
 }
 

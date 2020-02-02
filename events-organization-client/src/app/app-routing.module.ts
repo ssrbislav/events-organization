@@ -6,9 +6,9 @@ import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
 
 const appRoutes: Routes = [
-  { path: "", redirectTo: "/events", pathMatch: "full" },
+  { path: "", redirectTo: "/main", pathMatch: "full" },
   {
-    path: "events",
+    path: "main",
     component: MainPageComponent
   },
   {
@@ -22,6 +22,10 @@ const appRoutes: Routes = [
   {
     path: "admin",
     component: AdminComponent
+  },
+  {
+    path: "events",
+    component: MainPageComponent
   }
 ];
 

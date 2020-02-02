@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material";
-import { Sector } from "src/app/model/sector.model";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
+import { Sector, SectorDTO } from "src/app/model/sector.model";
+import { SectorService } from "src/app/services/sector.service";
 
 @Component({
   selector: "app-add-sector",
@@ -8,11 +9,27 @@ import { Sector } from "src/app/model/sector.model";
   styleUrls: ["./add-sector.component.css"]
 })
 export class AddSectorComponent implements OnInit {
-  sector: Sector = new Sector();
+  sector: SectorDTO = new SectorDTO();
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialogRef: MatDialogRef<AddSectorComponent>,
+    private sectorService: SectorService
+  ) {}
 
-  ngOnInit() {
-    console.log(this.sector);
+  ngOnInit() {}
+
+  onSubmit() {
+    this.sector.hallId = this.data.hallId;
+
+    this.sectorService.addNewSector(this.sector).subscribe(
+      data => {
+        alert("Sector succesfully created!");
+        this.dialogRef.close();
+      },
+      error => {
+        alert("Error occured!");
+      }
+    );
   }
 }

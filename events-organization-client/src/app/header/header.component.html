@@ -11,7 +11,7 @@
         <li routerLink="register">REGISTRATION</li>
       </ul>
       <ul *ngIf="(showView) == 'admin'">
-        <li>USERNAME</li>
+        <li>{{ username.toUpperCase() }}</li>
         <li (click)="logout()">LOGOUT</li>
       </ul>
     </div>

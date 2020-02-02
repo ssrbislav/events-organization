@@ -10,7 +10,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class SectorService {
-  private url = "http://localhost:8080/api/user/sector";
+  private url = "http://localhost:8080/api/sector";
 
   constructor(private http: HttpClient) {}
 
@@ -19,10 +19,14 @@ export class SectorService {
   }
 
   getSector(id: number) {
-    return this.http.get<Sector>(`${this.url}/id`);
+    return this.http.get<Sector>(`${this.url}/${id}`);
   }
 
   addNewSector(data: SectorDTO) {
     return this.http.post<Sector>(`${this.url}/create`, data, httpOptions);
+  }
+
+  updateSector(data: Sector) {
+    return this.http.put<Sector>(`${this.url}/update`, data, httpOptions);
   }
 }
