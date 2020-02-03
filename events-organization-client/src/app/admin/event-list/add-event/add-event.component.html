@@ -1,0 +1,15 @@
+<div class="pricelist grid-item">
+  <h3>CREATE NEW EVENT</h3>
+  <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+    <!-- <mat-form-field class="example-full-width">
+        <input class="location-elem" matInput placeholder="LOCATION NAME" required name="name"
+          [(ngModel)]="location.name">
+      </mat-form-field> -->
+
+
+    <button class="create_btn" id="create_btn" type="submit" mat-raised-button>CREATE
+      EVENT</button>
+    <button class="close_btn" type="button" mat-raised-button mat-dialog-close>CLOSE </button>
+
+  </form>
+</div>
