@@ -43,6 +43,7 @@ import { EditSectorComponent } from "./admin/location-list/hall-list/sector-list
 import { AddLocationComponent } from "./admin/location-list/add-location/add-location.component";
 import { AddHallComponent } from "./admin/location-list/hall-list/add-hall/add-hall.component";
 import { AddEventComponent } from "./admin/event-list/add-event/add-event.component";
+import { EventsComponent } from './main-page/events/events.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AddEventComponent } from "./admin/event-list/add-event/add-event.compon
     EditSectorComponent,
     AddLocationComponent,
     AddHallComponent,
-    AddEventComponent
+    AddEventComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

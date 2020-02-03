@@ -8,7 +8,8 @@ import { Router } from "@angular/router";
   styleUrls: ["./main-page.component.css"]
 })
 export class MainPageComponent implements OnInit {
-  roles: string[];
+  private roles: string[];
+  private enter = false;
 
   constructor(
     private tokenStorage: TokenStorageService,
