@@ -7,8 +7,8 @@
 
     <div class="navigation">
       <ul *ngIf="(showView) == ''">
-        <li routerLink="login">LOGIN </li>
-        <li routerLink="register">REGISTRATION</li>
+        <li routerLink="login" id="login">LOGIN </li>
+        <li routerLink="register" id="register">REGISTRATION</li>
       </ul>
       <ul *ngIf="(showView) == 'admin'">
         <li>{{ username.toUpperCase() }}</li>

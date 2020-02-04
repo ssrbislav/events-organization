@@ -70,7 +70,7 @@
       <div class="form-group">
         <br>
         <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="form.phoneNumber" #phoneNumber="ngModel"
-          required placeholder="DATE OF BIRTH" />
+          required placeholder="PHONE NUMBER" />
         <div class="error" *ngIf="f.submitted && phoneNumber.invalid">
           <div *ngIf="phoneNumber.errors.required">Phone number is required</div>
         </div>
@@ -78,7 +78,7 @@
       <div class="form-group">
         <button class="submitbtn">REGISTER</button>
         <button class="cancelbtn" type="button" routerLink="">CANCEL</button>
-        <div class="error" *ngIf="f.submitted && isLoginFailed">
+        <div class="error" *ngIf="f.submitted && !f.form.valid">
           Registration error -> Wrong inputs!
         </div>
       </div>

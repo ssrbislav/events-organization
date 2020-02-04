@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { EventService } from "src/app/services/event.service";
 import { MatDialogConfig, MatDialog } from "@angular/material";
 import { AddEventComponent } from "./add-event/add-event.component";
+import { LocationService } from "src/app/services/location.service";
 
 @Component({
   selector: "app-event-list",
@@ -10,18 +11,29 @@ import { AddEventComponent } from "./add-event/add-event.component";
 })
 export class EventListComponent implements OnInit {
   private events: any;
+  private locations: any;
 
-  constructor(private eventService: EventService, private dialog: MatDialog) {}
+  constructor(
+    private eventService: EventService,
+    private dialog: MatDialog,
+    private locationServis: LocationService
+  ) {}
 
   ngOnInit() {
     this.getEvents();
+    this.getLocations();
+  }
+
+  getLocations() {
+    this.locationServis.getLocations().subscribe(data => {
+      this.locations = data;
+    });
   }
 
   getEvents() {
     this.eventService.getEvents().subscribe(
       data => {
         this.events = data;
-        console.log(this.events);
       },
       error => {
         console.log(error);
@@ -35,7 +47,8 @@ export class EventListComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      id: 1
+      id: 1,
+      data: this.locations
     };
 
     const dialog = this.dialog.open(AddEventComponent, dialogConfig);
