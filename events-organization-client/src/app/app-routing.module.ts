@@ -5,6 +5,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
 import { RoleGuardService } from "./auth/role-guard.service";
+import { EventInfoComponent } from "./main-page/event-info/event-info.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/main", pathMatch: "full" },
@@ -30,11 +31,11 @@ const appRoutes: Routes = [
   },
   {
     path: "events",
-    component: MainPageComponent,
-    canActivate: [RoleGuardService],
-    data: {
-      expectedRole: "ROLE_VISITOR"
-    }
+    component: MainPageComponent
+  },
+  {
+    path: "event-info",
+    component: EventInfoComponent
   }
 ];
 
