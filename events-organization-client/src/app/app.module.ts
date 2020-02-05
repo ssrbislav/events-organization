@@ -45,6 +45,7 @@ import { AddHallComponent } from "./admin/location-list/hall-list/add-hall/add-h
 import { AddEventComponent } from "./admin/event-list/add-event/add-event.component";
 import { EventsComponent } from "./main-page/events/events.component";
 import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsectors/define-eventsectors.component";
+import { EventInfoComponent } from './main-page/event-info/event-info.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsect
     AddHallComponent,
     AddEventComponent,
     EventsComponent,
-    DefineEventsectorsComponent
+    DefineEventsectorsComponent,
+    EventInfoComponent
   ],
   imports: [
     BrowserModule,
