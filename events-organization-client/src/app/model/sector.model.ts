@@ -4,16 +4,7 @@ export class SectorDTO {
   numOfColumns: number;
   hallId: number;
 
-  constructor() // sectorMark: string,
-  // numOfRows: number,
-  // numOfColumns: number,
-  // hallId: number
-  {
-    // this.sectorMark = sectorMark;
-    // this.numOfRows = numOfRows;
-    // this.numOfColumns = numOfColumns;
-    // this.hallId = hallId;
-  }
+  constructor() {}
 }
 
 export class Sector {

@@ -3,6 +3,7 @@ import { EventService } from "src/app/services/event.service";
 import { MatDialogConfig, MatDialog } from "@angular/material";
 import { AddEventComponent } from "./add-event/add-event.component";
 import { LocationService } from "src/app/services/location.service";
+import { DefineEventsectorsComponent } from "./define-eventsectors/define-eventsectors.component";
 
 @Component({
   selector: "app-event-list",
@@ -52,5 +53,18 @@ export class EventListComponent implements OnInit {
     };
 
     const dialog = this.dialog.open(AddEventComponent, dialogConfig);
+  }
+
+  defineES(event: any) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      event
+    };
+
+    const dialog = this.dialog.open(DefineEventsectorsComponent, dialogConfig);
   }
 }

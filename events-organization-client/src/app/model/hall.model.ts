@@ -8,8 +8,8 @@ export class HallDTO {
 }
 
 export class Hall {
-  private id: number;
-  private name: string;
-  private sectors: [];
-  private deleted: boolean;
+  id: number;
+  name: string;
+  sectors: [];
+  deleted: boolean;
 }

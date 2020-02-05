@@ -1,36 +1,24 @@
-export class LocationDTO {
-  private name: string;
-  private streetName: string;
-  private number: number;
-  private city: string;
-  private zipCode: string;
-  private country: string;
+import { Hall } from "./hall.model";
 
-  constructor() // name: string,
-  // streetName: string,
-  // number: number,
-  // city: string,
-  // zipCode: string,
-  // country: string
-  {
-    // this.name = name;
-    // this.streetName = streetName;
-    // this.number = number;
-    // this.city = city;
-    // this.zipCode = zipCode;
-    // this.country = country;
-  }
+export class LocationDTO {
+  name: string;
+  streetName: string;
+  number: number;
+  city: string;
+  zipCode: string;
+  country: string;
+
+  constructor() {}
 }
 
 export class Location {
-  private id: number;
-  private name: string;
-  private streetName: string;
-  private number: number;
-  private city: string;
-  private zipCode: string;
-  private country: string;
-  private deleted: boolean;
-  private halls: [];
-  private events: [];
+  id: number;
+  name: string;
+  streetName: string;
+  number: number;
+  city: string;
+  zipCode: string;
+  country: string;
+  deleted: boolean;
+  halls: Hall[];
 }

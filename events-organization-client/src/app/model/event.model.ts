@@ -1,3 +1,5 @@
+import { Location } from "./location.model";
+
 export class EventDTO {
   name: string;
   startDate: Date;
@@ -9,13 +11,14 @@ export class EventDTO {
 }
 
 export class Event {
-  private id: number;
-  private name: string;
-  private startDate: Date;
-  private endDate: Date;
-  private eventType: string;
-  private eventSector: any;
-  private deleted: boolean;
+  id: number;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+  eventType: string;
+  location: Location;
+  eventSector: any;
+  deleted: boolean;
 
   constructor() {}
 }

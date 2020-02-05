@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Event, EventDTO } from "../model/event.model";
+import { EventSector, EventSectorDTO } from "../model/eventSector.model";
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -11,6 +12,7 @@ const httpOptions = {
 })
 export class EventService {
   private url = "http://localhost:8080/api/event";
+  private url2 = "http://localhost:8080/api/event_sector/create";
 
   constructor(private http: HttpClient) {}
 
@@ -24,5 +26,9 @@ export class EventService {
 
   createEvent(data: EventDTO) {
     return this.http.post<Event>(`${this.url}/create`, data, httpOptions);
+  }
+
+  createEventSector(data: EventSectorDTO) {
+    return this.http.post<EventSector>(this.url2, data, httpOptions);
   }
 }

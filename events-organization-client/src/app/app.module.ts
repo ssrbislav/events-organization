@@ -43,8 +43,8 @@ import { EditSectorComponent } from "./admin/location-list/hall-list/sector-list
 import { AddLocationComponent } from "./admin/location-list/add-location/add-location.component";
 import { AddHallComponent } from "./admin/location-list/hall-list/add-hall/add-hall.component";
 import { AddEventComponent } from "./admin/event-list/add-event/add-event.component";
-import { EventsComponent } from './main-page/events/events.component';
-import { DefineEventsectorsComponent } from './admin/event-list/define-eventsectors/define-eventsectors.component';
+import { EventsComponent } from "./main-page/events/events.component";
+import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsectors/define-eventsectors.component";
 
 @NgModule({
   declarations: [
@@ -94,7 +94,8 @@ import { DefineEventsectorsComponent } from './admin/event-list/define-eventsect
     EditSectorComponent,
     AddLocationComponent,
     AddHallComponent,
-    AddEventComponent
+    AddEventComponent,
+    DefineEventsectorsComponent
   ],
   providers: [
     RoleGuardService,
