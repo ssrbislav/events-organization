@@ -13,4 +13,6 @@ public interface SectorRepository extends JpaRepository<Sector, Long> {
     Optional<Sector> findById(Long id);
 
     Optional<Sector> findByIdAndDeletedIsFalse(Long id);
+    
+    Optional<Sector> findBySectorMark(String s);
 }
