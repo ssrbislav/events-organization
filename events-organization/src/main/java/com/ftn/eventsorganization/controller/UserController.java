@@ -3,6 +3,7 @@ package com.ftn.eventsorganization.controller;
 import com.ftn.eventsorganization.DTO.JwtResponse;
 import com.ftn.eventsorganization.DTO.LoginDTO;
 import com.ftn.eventsorganization.DTO.RegistrationDTO;
+import com.ftn.eventsorganization.DTO.ResponseMessage;
 import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.model.User;
 import com.ftn.eventsorganization.repository.UserRepository;
@@ -69,7 +70,7 @@ public class UserController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegistrationDTO signUpRequest) throws InvalidInputException {
 
         Optional<User> user = Optional.ofNullable(visitorService.create(signUpRequest));
-
-        return new ResponseEntity<>("User registered successfully!", HttpStatus.OK);
+        ResponseMessage message = new ResponseMessage("User registered successfully");
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

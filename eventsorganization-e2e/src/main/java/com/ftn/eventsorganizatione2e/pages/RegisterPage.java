@@ -1,8 +1,11 @@
 package com.ftn.eventsorganizatione2e.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegisterPage {
 
@@ -45,6 +48,11 @@ public class RegisterPage {
         this.driver = driver;
     }
 
+    public void ensureIsDisplayed() {
+        (new WebDriverWait(driver, 10)).until(
+                ExpectedConditions.presenceOfElementLocated(By.className("login-form"))
+        );
+    }
 
     public WebElement getUsername() {
         return username;
@@ -61,7 +69,7 @@ public class RegisterPage {
     }
 
     public void setEmail(String value) {
-        WebElement element = getUsername();
+        WebElement element = getEmail();
         element.clear();
         element.sendKeys(value);
     }
@@ -71,7 +79,7 @@ public class RegisterPage {
     }
 
     public void setPassword(String value) {
-        WebElement element = getUsername();
+        WebElement element = getPassword();
         element.clear();
         element.sendKeys(value);
     }
@@ -81,7 +89,7 @@ public class RegisterPage {
     }
 
     public void setPassword2(String value) {
-        WebElement element = getUsername();
+        WebElement element = getPassword2();
         element.clear();
         element.sendKeys(value);
     }
@@ -91,7 +99,7 @@ public class RegisterPage {
     }
 
     public void setFirstName(String value) {
-        WebElement element = getUsername();
+        WebElement element = getFirstName();
         element.clear();
         element.sendKeys(value);
     }
@@ -101,7 +109,7 @@ public class RegisterPage {
     }
 
     public void setLastName(String value) {
-        WebElement element = getUsername();
+        WebElement element = getLastName();
         element.clear();
         element.sendKeys(value);
     }
@@ -111,7 +119,7 @@ public class RegisterPage {
     }
 
     public void setDateOfBirth(String value) {
-        WebElement element = getUsername();
+        WebElement element = getDateOfBirth();
         element.clear();
         element.sendKeys(value);
     }
@@ -121,7 +129,7 @@ public class RegisterPage {
     }
 
     public void setAddress(String value) {
-        WebElement element = getUsername();
+        WebElement element = getAddress();
         element.clear();
         element.sendKeys(value);
     }
@@ -131,7 +139,7 @@ public class RegisterPage {
     }
 
     public void setPhoneNumber(String value) {
-        WebElement element = getUsername();
+        WebElement element = getPhoneNumber();
         element.clear();
         element.sendKeys(value);
     }

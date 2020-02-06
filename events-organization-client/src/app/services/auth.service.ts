@@ -22,7 +22,7 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  signUp(info: SignupInfo): Observable<string> {
-    return this.http.post<string>(this.registrationUrl, info, httpOptions);
+  signUp(info: SignupInfo) {
+    return this.http.post<any>(this.registrationUrl, info, httpOptions);
   }
 }

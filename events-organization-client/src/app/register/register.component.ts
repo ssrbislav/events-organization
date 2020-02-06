@@ -52,17 +52,17 @@ export class RegisterComponent implements OnInit {
       this.form.phoneNumber
     );
 
-    console.log(this.signupInfo);
     this.authService.signUp(this.signupInfo).subscribe(
-      () => {
-        window.alert(
-          "Registration successfull! \nPlease activate your account!"
-        );
+      data => {
+        console.log(data);
+        window.alert("Registration successfull");
         this.isSignUpFailed = false;
         this.isSignedUp = true;
         this.router.navigate(["login"]);
       },
       error => {
+        console.log(error);
+
         this.errorMessage = error.error.message;
         this.isSignUpFailed = true;
       }
