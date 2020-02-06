@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 public class WebDriverService {
 	private static WebDriver driver;
 
-	// Current users directory.
 	private static final String USER_DIR = System.getProperty("user.dir");
 
 	public static WebDriver getDriver() {
@@ -20,7 +19,8 @@ public class WebDriverService {
 	public static WebDriver startDriver(String browser) {
 		Preconditions.checkNotNull(browser, "Target browser parameter is null");
 		if (WebDriverService.driver != null) {
-			throw new AssertionError("Something is wrong... WebDriver instance is tried to be re-initialized");
+			return driver;
+//			throw new AssertionError("Something is wrong... WebDriver instance is tried to be re-initialized");
 		}
 		if (browser.toLowerCase().equals("firefox")) {
 			System.setProperty("webdriver.firefox.driver", "geckodriver.exe");
