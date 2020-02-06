@@ -36,7 +36,6 @@ public class RegisterTest {
     @Test
     public void testRegisterEmailExist() throws InterruptedException {
         registerPage.setUsername("korost");
-
         registerPage.setEmail("koros@gmail.com");
         registerPage.setPassword("lozinka");
         registerPage.setPassword2("lozinka");
