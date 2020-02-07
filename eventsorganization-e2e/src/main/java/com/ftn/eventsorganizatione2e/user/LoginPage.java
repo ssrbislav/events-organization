@@ -1,4 +1,4 @@
-package com.ftn.eventsorganizatione2e.pages;
+package com.ftn.eventsorganizatione2e.user;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

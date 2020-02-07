@@ -22,6 +22,8 @@ export class AddSectorComponent implements OnInit {
   onSubmit() {
     this.sector.hallId = this.data.hallId;
 
+    console.log(this.sector);
+
     this.sectorService.createSector(this.sector).subscribe(
       data => {
         alert("Sector succesfully created!");

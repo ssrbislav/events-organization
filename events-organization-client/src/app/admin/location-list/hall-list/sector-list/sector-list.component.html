@@ -17,7 +17,7 @@
           <td>{{sector.numOfRows}}</td>
           <td>{{sector.numOfColumns}}</td>
           <td id="delete">
-            <button mat-raised-button (click)="editSector(sector)">
+            <button class="edit_sector" mat-raised-button (click)="editSector(sector)">
               <mat-icon>edit</mat-icon>
             </button>
           </td>
@@ -29,7 +29,7 @@
         </tr>
         <mat-divider></mat-divider>
     </table>
-    <button class="new_loc" mat-raised-button (click)="addNewSector(hall.id)">ADD NEW SECTOR </button>
+    <button class="new_sector" mat-raised-button (click)="addNewSector(hall.id)">ADD NEW SECTOR </button>
     <button class="close_btn" mat-raised-button mat-dialog-close>CLOSE </button>
   </div>
 </div>

@@ -13,7 +13,7 @@
         <tr *ngFor="let hall of halls; let i = index">
           <td>{{hall.name}}</td>
           <td id="location_pass">
-            <button mat-raised-button (click)="listSectors(hall)">
+            <button id="list_sector" mat-raised-button (click)="listSectors(hall)">
               <mat-icon>account_balance</mat-icon>
             </button>
           </td>

@@ -1,6 +1,5 @@
-package com.ftn.eventsorganizatione2e.tests;
+package com.ftn.eventsorganizatione2e.user;
 
-import com.ftn.eventsorganizatione2e.pages.LoginPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.Alert;
