@@ -9,7 +9,6 @@ import { EventService } from "src/app/services/event.service";
   styleUrls: ["./add-event.component.css"]
 })
 export class AddEventComponent implements OnInit {
-  minDate = new Date();
   private locations: any;
   private form: any = {};
   private event: EventDTO = new EventDTO();
@@ -30,11 +29,11 @@ export class AddEventComponent implements OnInit {
 
     this.eventService.createEvent(this.event).subscribe(
       data => {
-        console.log(data);
         this.dialogRef.close();
       },
       error => {
         console.log(error);
+        alert("Error occured!");
       }
     );
   }
