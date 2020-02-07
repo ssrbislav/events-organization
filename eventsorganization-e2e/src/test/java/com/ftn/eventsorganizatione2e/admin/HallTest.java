@@ -1,6 +1,5 @@
-package com.ftn.eventsorganizatione2e.tests;
+package com.ftn.eventsorganizatione2e.admin;
 
-import com.ftn.eventsorganizatione2e.admin.LocationPage;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -16,11 +15,11 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LocationTest {
+public class HallTest {
 
     private WebDriver driver;
 
-    LocationPage locationPage;
+    HallPage hallPage;
 
     @Before
     public void setup() {
@@ -35,55 +34,43 @@ public class LocationTest {
         WebElement submitbtn = driver.findElement(By.className("submitbtn"));
         submitbtn.click();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        locationPage = PageFactory.initElements(driver, LocationPage.class);
+        hallPage = PageFactory.initElements(driver, HallPage.class);
     }
 
     @Test
-    public void testNavigationSuccessfull() {
-        assertThat(driver.getCurrentUrl()).isEqualTo("http://localhost:4200/admin");
-        driver.close();
-    }
-
-    @Test
-    public void testLocationErrorSameName() throws InterruptedException {
-        locationPage.getNewLocBtn().click();
+    public void testHallSuccess() throws InterruptedException {
+        hallPage.getListHallsBtn().click();
         WebElement dialog = driver.findElement(By.className("cdk-global-scrollblock"));
         assertThat(dialog.isDisplayed());
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         assertThat(dialog.getSize() == new Dimension(244, 388));
-        locationPage.setName("Lokacija");
-        locationPage.setStreetName("Tolstojeva");
-        locationPage.setNumber("34");
-        locationPage.setCity("Novi Sad");
-        locationPage.setZipCode("22331");
-        locationPage.setCountry("Srbija");
-        locationPage.getSubmitBtn().click();
+        hallPage.getHewHallBtn().click();
+        WebElement dialog2 = driver.findElement(By.id("mat-dialog-1"));
+        assertThat(dialog2.isDisplayed());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        hallPage.setHallName("HALA 4");
+        hallPage.getSubmitbtn().click();
         new WebDriverWait(driver, 3).until(ExpectedConditions.alertIsPresent());
-        Thread.sleep(1000);
-        assertThat(driver.switchTo().alert().getText().equals("Error occured!"));
-        driver.close();
-    }
-
-    @Test
-    public void testLocationOK() throws InterruptedException {
-        locationPage.getNewLocBtn().click();
-        WebElement dialog = driver.findElement(By.className("cdk-global-scrollblock"));
-        assertThat(dialog.isDisplayed());
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        assertThat(dialog.getSize() == new Dimension(244, 388));
-        locationPage.setName("Lokacija2s55");
-        locationPage.setStreetName("Tolstojeva");
-        locationPage.setNumber("34");
-        locationPage.setCity("Novi Sad");
-        locationPage.setZipCode("22331");
-        locationPage.setCountry("Srbija");
-        locationPage.getSubmitBtn().click();
-        new WebDriverWait(driver, 2).until(ExpectedConditions.alertIsPresent());
-        assertThat(driver.switchTo().alert().getText().equals("Location successfully added!"));
+        assertThat(driver.switchTo().alert().getText().equals("Hall successfully created!"));
         Thread.sleep(1000);
         driver.switchTo().alert().accept();
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        assertThat(!dialog.isDisplayed());
+        assertThat(!dialog2.isDisplayed());
+        driver.close();
+    }
+
+    @Test
+    public void hallCancel() {
+        hallPage.getListHallsBtn().click();
+        WebElement dialog = driver.findElement(By.className("cdk-global-scrollblock"));
+        assertThat(dialog.isDisplayed());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        assertThat(dialog.getSize() == new Dimension(244, 388));
+        hallPage.getHewHallBtn().click();
+        WebElement dialog2 = driver.findElement(By.id("mat-dialog-1"));
+        assertThat(dialog2.isDisplayed());
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        hallPage.getSubmitbtn().click();
+        assertThat(dialog2.isDisplayed());
         assertThat(driver.getCurrentUrl()).isEqualTo("http://localhost:4200/admin");
         driver.close();
     }
