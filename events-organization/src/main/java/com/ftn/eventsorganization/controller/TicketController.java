@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.eventsorganization.DTO.ResponseMessage;
 import com.ftn.eventsorganization.DTO.TicketDto;
 import com.ftn.eventsorganization.exception.InvalidInputException;
 import com.ftn.eventsorganization.exception.ObjectNotFoundException;
@@ -39,37 +40,41 @@ public class TicketController {
         System.out.println(authToken);
         String username = this.provider.getUserNameFromJwtToken(authToken);
         System.out.println("Ulogovan korisnik je: " + username);
-        String message = "";
         
+        ResponseMessage msg = new ResponseMessage();
         try {
 			boolean succsses  = ticketService.reservation(reservationTickets, username);
 			if(succsses) {
-				message = "You successfully reserved your tickets!";
+				msg.setMessage("You successfully reserved your tickets!");
 			} else {
-				message = "Your reservation failed!";
+				msg.setMessage("Your reservation failed!");
 			}
 			
 		} catch (ObjectNotFoundException | InvalidInputException e) {
-			message = e.getMessage();
-			return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+			msg.setMessage(e.getMessage());
+			return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
 		}
         
-        return new ResponseEntity<>(message, HttpStatus.OK);    
+        return new ResponseEntity<>(msg, HttpStatus.OK);    
 	}
 	
 	@PreAuthorize("hasRole('ROLE_VISITOR')")
     @GetMapping("/{id}")
     public ResponseEntity findOne(@PathVariable Long id) throws ObjectNotFoundException {
 
+		ResponseMessage msg = new ResponseMessage();
         try {
             boolean d = ticketService.cancelReservation(id);
             if (d == true){
-            	return new ResponseEntity<>("Successfully canceled reservation!", HttpStatus.OK);
+            	msg.setMessage("Successfully canceled reservation!");
+            	return new ResponseEntity<>(msg, HttpStatus.OK);
             }
         } catch (ObjectNotFoundException ex) {
-            return new ResponseEntity<>("Unsuccessful try of canceling reservation!", HttpStatus.NOT_FOUND);
+        	msg.setMessage("Unsuccessful try of canceling reservation!");
+            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>("Unsuccessful try of canceling reservation!", HttpStatus.NOT_FOUND);
+        msg.setMessage("Unsuccessful try of canceling reservation!");
+        return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
     }
 	
 }
