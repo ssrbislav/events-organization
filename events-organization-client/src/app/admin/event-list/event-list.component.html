@@ -1,0 +1,36 @@
+<div class="container">
+  <h3>EVENTS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">NAME</th>
+          <th class="head" scope="col">STARTING DATE</th>
+          <th class="head" scope="col">ENDING DATE</th>
+          <th class="head" scope="col">EVENT TYPE</th>
+          <th class="head" scope="col">DEFINE ES</th>
+          <th class="head" scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events; let i = index">
+          <td>{{event.name}}</td>
+          <td>{{event.startDate}}</td>
+          <td>{{event.endDate}}</td>
+          <td>{{event.eventType}}</td>
+          <td id="eventSectors">
+            <button mat-raised-button (click)="defineES(event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
+            <button mat-raised-button class="delete_btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <mat-divider></mat-divider>
+    </table>
+    <button class="new_loc" mat-raised-button (click)="addNewEvent()">ADD NEW EVENT </button>
+  </div>
+</div>

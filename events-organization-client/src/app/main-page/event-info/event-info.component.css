@@ -1,0 +1,60 @@
+.container {
+  display: flex;
+  margin-top: 100px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 30px;
+
+}
+
+.image {
+  background: url("../../../assets/images/event_img.jpg") center center;
+  background-size: cover;
+  width: 500px;
+  height: 400px;
+  margin: 0 auto;
+  box-shadow: 0px 7px 26px -4px rgba(0, 0, 0, 0.75);
+}
+
+.heading {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.text {
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px;
+  padding-top: 0;
+}
+
+.home {
+  border: 1px solid rgb(87, 87, 87);
+  padding: 3px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 12px -4px rgba(0, 0, 0, 0.75);
+}
+
+.home:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 5px -4px rgba(0, 0, 0, 0.75);
+}
+
+button {
+  width: 400px;
+  background-color: rgb(31, 31, 31);
+  color: #fff;
+}
+
+button:hover {
+  box-shadow: 0px 3px 16px 3px rgba(0, 0, 0, 0.75);
+}

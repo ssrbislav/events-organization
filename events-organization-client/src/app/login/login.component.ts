@@ -57,9 +57,10 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log(error);
+        this.isLoginFailed = true;
+
         window.alert("Wrong credentials!");
         this.errorMessage = error.error.message;
-        this.isLoginFailed = true;
       }
     );
   }

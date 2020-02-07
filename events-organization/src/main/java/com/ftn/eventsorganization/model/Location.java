@@ -1,5 +1,7 @@
 package com.ftn.eventsorganization.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<Hall> halls;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "location")
     private List<Event> events;
 

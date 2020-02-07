@@ -3,11 +3,14 @@ import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
+import { AdminComponent } from "./admin/admin.component";
+import { RoleGuardService } from "./auth/role-guard.service";
+import { EventInfoComponent } from "./main-page/event-info/event-info.component";
 
 const appRoutes: Routes = [
-  { path: "", redirectTo: "/events", pathMatch: "full" },
+  { path: "", redirectTo: "/main", pathMatch: "full" },
   {
-    path: "events",
+    path: "main",
     component: MainPageComponent
   },
   {
@@ -17,6 +20,22 @@ const appRoutes: Routes = [
   {
     path: "register",
     component: RegisterComponent
+  },
+  {
+    path: "admin",
+    component: AdminComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_ADMIN"
+    }
+  },
+  {
+    path: "events",
+    component: MainPageComponent
+  },
+  {
+    path: "event-info",
+    component: EventInfoComponent
   }
 ];
 

@@ -25,7 +25,6 @@ public class Event {
 
     private EventType eventType;
 
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;

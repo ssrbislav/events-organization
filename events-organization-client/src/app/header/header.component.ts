@@ -10,6 +10,7 @@ import { Router } from "@angular/router";
 export class HeaderComponent implements OnInit {
   showView = "";
   private roles: string[];
+  username: string;
 
   constructor(
     private tokenStorage: TokenStorageService,
@@ -23,6 +24,7 @@ export class HeaderComponent implements OnInit {
   getAuthFromStorage() {
     if (this.tokenStorage.getToken()) {
       this.roles = this.tokenStorage.getAuthorities();
+      this.username = this.tokenStorage.getUsername();
       this.roles.every(role => {
         this.showView = "visitor";
         if (role === "ROLE_ADMIN") {

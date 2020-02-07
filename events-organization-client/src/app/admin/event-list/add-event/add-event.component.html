@@ -1,0 +1,46 @@
+<div class="pricelist grid-item">
+  <h3>CREATE NEW EVENT</h3>
+  <hr>
+  <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+
+    <mat-form-field class="example-full-width">
+      <input class="location-elem" matInput placeholder="EVENT NAME" required name="name" [(ngModel)]="form.name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="START DATE" [min]="minDate" [max]="maxDate" required
+        id="startDate" name="startDate" [(ngModel)]="form.startDate" [value]="form.startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="END DATE" [min]="minDate" [max]="maxDate" required
+        id="endDate" name="endDate" [(ngModel)]="form.endDate" [value]="form.endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <div class="form-group">
+      <mat-select name="eventType" [(ngModel)]="form.eventType" required placeholder="EVENT TYPE">
+        <mat-option *ngFor="let eventType of eventTypes" [value]='eventType'>
+          {{eventType}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div class="form-group">
+      <mat-select name="location" [(ngModel)]="form.locationId" required placeholder="LOCATIONS">
+        <mat-option *ngFor="let location of locations" [value]='location.id'>
+          {{location.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+
+    <button class="create_btn" id="create_btn" type="submit" mat-raised-button>CREATE
+      EVENT</button>
+    <button class="close_btn" type="button" mat-raised-button mat-dialog-close>CLOSE </button>
+
+  </form>
+</div>

@@ -13,7 +13,18 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatNativeDateModule,
-  MatInputModule
+  MatInputModule,
+  MatSortModule,
+  MatTableModule,
+  MatIconModule,
+  MatListModule,
+  MatGridListModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatButtonModule,
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+  MatDialogRef
 } from "@angular/material";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from "@angular/router";
@@ -22,6 +33,20 @@ import {
   httpInterceptorProviders
 } from "./auth/auth-interceptor";
 import { RoleGuardService } from "./auth/role-guard.service";
+import { AdminComponent } from "./admin/admin.component";
+import { EventListComponent } from "./admin/event-list/event-list.component";
+import { SectorListComponent } from "./admin/location-list/hall-list/sector-list/sector-list.component";
+import { HallListComponent } from "./admin/location-list/hall-list/hall-list.component";
+import { LocationListComponent } from "./admin/location-list/location-list.component";
+import { AddSectorComponent } from "./admin/location-list/hall-list/sector-list/add-sector/add-sector.component";
+import { EditSectorComponent } from "./admin/location-list/hall-list/sector-list/edit-sector/edit-sector.component";
+import { AddLocationComponent } from "./admin/location-list/add-location/add-location.component";
+import { AddHallComponent } from "./admin/location-list/hall-list/add-hall/add-hall.component";
+import { AddEventComponent } from "./admin/event-list/add-event/add-event.component";
+import { EventsComponent } from "./main-page/events/events.component";
+import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsectors/define-eventsectors.component";
+import { EventInfoComponent } from './main-page/event-info/event-info.component';
+import { ReservationComponent } from './main-page/event-info/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +54,21 @@ import { RoleGuardService } from "./auth/role-guard.service";
     MainPageComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    EventListComponent,
+    SectorListComponent,
+    HallListComponent,
+    LocationListComponent,
+    AddSectorComponent,
+    EditSectorComponent,
+    AddLocationComponent,
+    AddHallComponent,
+    AddEventComponent,
+    EventsComponent,
+    DefineEventsectorsComponent,
+    EventInfoComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,
@@ -41,11 +80,32 @@ import { RoleGuardService } from "./auth/role-guard.service";
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatGridListModule,
+    MatListModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
+  entryComponents: [
+    HallListComponent,
+    SectorListComponent,
+    AddSectorComponent,
+    EditSectorComponent,
+    AddLocationComponent,
+    AddHallComponent,
+    AddEventComponent,
+    DefineEventsectorsComponent
   ],
   providers: [
     RoleGuardService,
     httpInterceptorProviders,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -7,11 +7,15 @@
 
     <div class="navigation">
       <ul *ngIf="(showView) == ''">
-        <li routerLink="login">LOGIN </li>
-        <li routerLink="register">REGISTRATION</li>
+        <li routerLink="login" id="login">LOGIN </li>
+        <li routerLink="register" id="register">REGISTRATION</li>
       </ul>
       <ul *ngIf="(showView) == 'admin'">
-        <li>USERNAME</li>
+        <li>{{ username.toUpperCase() }}</li>
+        <li (click)="logout()">LOGOUT</li>
+      </ul>
+      <ul *ngIf="(showView) == 'visitor'">
+        <li>{{ username.toUpperCase() }}</li>
         <li (click)="logout()">LOGOUT</li>
       </ul>
     </div>
