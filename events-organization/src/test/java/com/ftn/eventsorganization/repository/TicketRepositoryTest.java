@@ -50,18 +50,6 @@ public class TicketRepositoryTest {
 	private ReservationRepository reservationRepository;
 	
 	@Autowired
-	private VisitorRepository visitorRepository;
-
-	@Autowired
-	private EventRepository eventRepository;
-	
-	@Autowired
-	private LocationRepository locationRepository;
-
-	@Autowired
-	private SectorRepository sectorRepository;
-	
-	@Autowired
 	HallRepository hallRepository;
 	
 	@Autowired 
@@ -78,20 +66,23 @@ public class TicketRepositoryTest {
 		
 	}
 	
-	/*
+	
 	@Test
 	public void testFindByEventSectorAndReserved() throws ParseException{
-		Location l = new Location("Sajam","Kralja Petra", 30, "Novi Sad", "21000", "Srbija");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateEnd = "2020-05-08";
-		Date date = sdf.parse(dateEnd);
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-		String date2 = "2020-02-05";
-		Date dateStart = sdf2.parse(date2);
-		EventSector es = new EventSector(new Event("Sajam poljoprivrede", dateStart, date, EventType.FAIR, l), 
-				new Sector( "SEC444", 4L, 4L, new Hall("Master centar", l)), 300, SectorType.REGULAR);
-		
-		List<Ticket> tickets = this.repository.findByEventSectorAndReserved(es, true);
-		assertNotNull(tickets);
-	}*/
+		List<Ticket> tickets = (List<Ticket>)this.repository.findByEventSectorAndReserved(esRepository.getOne(4L), true);
+		assertTrue(tickets.size() == 0);
+	}
+	
+	@Test
+	public void testFindByBoughtAndReservation(){
+		List<Ticket> t = (List<Ticket>)this.repository.findByBoughtAndReservation(false, reservationRepository.getOne(1L));
+		assertTrue(t.size() == 1);
+	} 
+	
+	@Test
+	public void testFindByReservation(){
+		List<Ticket> ticket = (List<Ticket>)this.repository.findByReservation(reservationRepository.getOne(1L));
+		assertTrue(ticket.size() == 1);
+	}
+	
 }

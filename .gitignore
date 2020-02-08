@@ -3,3 +3,5 @@
 events-organization/pom.xml
 events-organization/src/test/resources/application-test.properties
 events-organization/src/main/resources/application.properties
+events-organization/src/main/resources/application.properties
+events-organization/src/test/resources/application-test.properties
