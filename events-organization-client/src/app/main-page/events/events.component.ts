@@ -9,6 +9,7 @@ import { Event } from "src/app/model/event.model";
 })
 export class EventsComponent implements OnInit {
   private events: any;
+  private event: any;
 
   constructor(private eventService: EventService) {}
 
@@ -20,5 +21,9 @@ export class EventsComponent implements OnInit {
     this.eventService.getEvents().subscribe(data => {
       this.events = data;
     });
+  }
+
+  onEventInfo(event: any) {
+    this.event = event;
   }
 }

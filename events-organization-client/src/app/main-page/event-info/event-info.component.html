@@ -1,13 +1,16 @@
-<div class="overlay" *ngIf="isShow === true">
-  <h1>PLASE WAIT</h1>
-</div>
 <div class="container">
   <div class="content">
     <div class="home" routerLink="../">BACK TO HOME PAGE</div>
     <div class="image"></div>
-    <div class="heading">NASLOV</div>
-    <br />
+    <div class="heading">{{event.name}}</div>
     <div class="desc">
+      <div class="address">
+        <div>START DATE: <em>{{event.startDate}}</em></div>
+        <div>START DATE: <em>{{event.endDate}}</em></div>
+        <div>LOCATION: <em>{{event.location.country}}, {{event.location.city}},
+            {{event.location.streetName}}</em></div>
+      </div>
+      <hr>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       Lorem Ipsum has been the industry's standard dummy text ever since the
       1500s, when an unknown printer took a galley of type and scrambled it to
@@ -20,7 +23,7 @@
     </div>
     <hr />
     <div class="buttons">
-      <button mat-button mat-raised-button (click)="pay()">
+      <button mat-button mat-raised-button *ngIf="exist === true" (click)="makeReservationDialog(event)">
         RESERVE A TICKET
       </button>
     </div>

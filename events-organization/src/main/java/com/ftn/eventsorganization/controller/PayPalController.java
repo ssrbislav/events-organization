@@ -1,5 +1,6 @@
 package com.ftn.eventsorganization.controller;
 
+import com.ftn.eventsorganization.DTO.ResponseMessage;
 import com.ftn.eventsorganization.service.impl.PayPalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class PayPalController {
     }
 
     @PostMapping(value = "/complete/payment")
-    public Map<String, Object> completePayment(HttpServletRequest request, @RequestParam("paymentId") String paymentId, @RequestParam("payerId") String payerId){
+    public ResponseMessage completePayment(HttpServletRequest request, @RequestParam("paymentId") String paymentId, @RequestParam("payerId") String payerId){
         return payPalService.completePayment(request);
     }
 }

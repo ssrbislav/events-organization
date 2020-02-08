@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import { PaymentService } from "src/app/services/payment.service";
-import { Router } from "@angular/router";
+import { Component, OnInit, Input } from "@angular/core";
+import { TokenStorageService } from "src/app/auth/ttoken-storage.service";
+import { MatDialogConfig, MatDialog } from "@angular/material";
+import { MakeReservationComponent } from "./make-reservation/make-reservation.component";
 
 @Component({
   selector: "app-event-info",
@@ -8,27 +9,34 @@ import { Router } from "@angular/router";
   styleUrls: ["./event-info.component.css"]
 })
 export class EventInfoComponent implements OnInit {
-  private isShow = false;
+  @Input() event: any;
 
-  constructor(private paymentService: PaymentService, private router: Router) {}
+  private username: string;
+  private exist = false;
 
-  ngOnInit() {}
+  constructor(
+    private tokenStorage: TokenStorageService,
+    private dialog: MatDialog
+  ) {}
 
-  toggleDisplay() {
-    this.isShow = !this.isShow;
+  ngOnInit() {
+    this.checkIfUserExists();
   }
 
-  pay() {
-    this.toggleDisplay();
-    this.paymentService.makePayment("30").subscribe(
-      (data: any) => {
-        console.log(data);
-        window.location.href = data.redirect_url;
-      },
-      error => {
-        console.log(error);
-        this.toggleDisplay();
-      }
-    );
+  checkIfUserExists() {
+    this.username = this.tokenStorage.getUsername();
+    if (this.username) {
+      this.exist = true;
+    }
+  }
+
+  makeReservationDialog(event: any) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = { event };
+
+    const dialogRef = this.dialog.open(MakeReservationComponent, dialogConfig);
   }
 }

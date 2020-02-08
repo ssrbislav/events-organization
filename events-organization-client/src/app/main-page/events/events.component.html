@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!event">
   <div class="content">
     <div class="event" *ngFor="let event of events">
       <div class="image"></div>
@@ -6,8 +6,9 @@
         <div class="heading">{{ event.name }}</div>
         <div class="text">Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bi
         </div>
-        <button mat-button mat-raised-button routerLink="../event-info">MORE INFO</button>
+        <button mat-button mat-raised-button (click)="onEventInfo(event)">MORE INFO</button>
       </div>
     </div>
   </div>
 </div>
+<app-event-info [event]="event" *ngIf="event"></app-event-info>

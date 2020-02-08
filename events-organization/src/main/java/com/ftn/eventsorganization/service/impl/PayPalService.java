@@ -1,5 +1,6 @@
 package com.ftn.eventsorganization.service.impl;
 
+import com.ftn.eventsorganization.DTO.ResponseMessage;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -73,8 +74,8 @@ public class PayPalService {
         return response;
     }
 
-    public Map<String, Object> completePayment(HttpServletRequest req){
-        Map<String, Object> response = new HashMap();
+    public ResponseMessage completePayment(HttpServletRequest req){
+        ResponseMessage response = new ResponseMessage();
         Payment payment = new Payment();
         payment.setId(req.getParameter("paymentId"));
         PaymentExecution paymentExecution = new PaymentExecution();
@@ -83,13 +84,11 @@ public class PayPalService {
             APIContext context = new APIContext(clientId, clientSecret, mode);
             Payment createdPayment = payment.execute(context, paymentExecution);
             if(createdPayment!=null){
-                response.put("status", "success");
-                response.put("payment", createdPayment);
+                response.setMessage("success");
             }
         } catch (PayPalRESTException e) {
             System.err.println(e.getDetails());
         }
-        System.out.println(response);
         return response;
     }
 }

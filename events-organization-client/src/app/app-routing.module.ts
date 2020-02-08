@@ -7,6 +7,7 @@ import { AdminComponent } from "./admin/admin.component";
 import { RoleGuardService } from "./auth/role-guard.service";
 import { EventInfoComponent } from "./main-page/event-info/event-info.component";
 import { PaymentComponent } from "./payment/payment.component";
+import { MakeReservationComponent } from "./main-page/event-info/make-reservation/make-reservation.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/main", pathMatch: "full" },
@@ -41,6 +42,14 @@ const appRoutes: Routes = [
   {
     path: "payment",
     component: PaymentComponent
+  },
+  {
+    path: "make-reservation",
+    component: MakeReservationComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_VISITOR"
+    }
   }
 ];
 
