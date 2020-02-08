@@ -22,6 +22,7 @@ public class EventSector {
     @JoinColumn(name = "sector_id")
     private Sector sector;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "eventSector")
     private List<Ticket> tickets;
 

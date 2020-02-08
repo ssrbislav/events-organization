@@ -150,7 +150,7 @@ public class TicketServiceImpl implements TicketService {
 		}
 	}
 	
-	private boolean findExpTickets(Reservation r){
+	public boolean findExpTickets(Reservation r){
 		List<Ticket> t = repository.findByBoughtAndReservation(false, r);
 		System.out.println("velicina liste tiketa  " +t.size());
 		if(t.size() == 0){
@@ -171,6 +171,17 @@ public class TicketServiceImpl implements TicketService {
 			repository.delete(ticket);
 		}
 		reservationRepository.delete(r);
+		return true;
+	}
+
+	@Override
+	public boolean buy(Long id) throws ObjectNotFoundException {
+		Reservation r = reservationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Reservation with id" +id +"does not exist!"));
+		List<Ticket> t = repository.findByReservation(r);
+		for (Ticket ticket : t) {
+			ticket.setBought(true);
+			repository.save(ticket);
+			}
 		return true;
 	}
 	

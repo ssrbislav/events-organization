@@ -18,3 +18,11 @@ insert into event(deleted, end_date, event_type, name, start_date, location_id) 
 insert into event_sector(price, sector_type, event_id, sector_id) values(200.0, 1, 1, 2);
 insert into event_sector(price, sector_type, event_id, sector_id) values(330.0, 2, 1, 2);
 insert into event_sector(price, sector_type, event_id, sector_id) values(500.0, 0, 2, 3);
+insert into event_sector(price, sector_type, event_id, sector_id) values(500.0, 0, 2, 1);
+
+insert into user(id, address, date_of_birth, email, first_name, last_name, password, phone_number, username) values 
+(1, "Adresa", "1990-01-01", "visitor@visitor.com", "Ime", "Prezime", "visitor", "060123456", "visitor");	
+
+insert into visitor(active, blocked, id) values (1, 0, 1);
+insert into reservation(id, canceled, deleted, expire_date, reservation_date, visitor_id) values (1, 0, 0, "2020-05-03", "2020-05-02", "1");
+insert into ticket(id, bought, reserved, seat_column, seat_row, visitor_id, event_sector_id, reservation_id) values (1, 0, 1, 1, 1, 1, 1, 1);

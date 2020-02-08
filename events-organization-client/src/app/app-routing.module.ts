@@ -6,6 +6,7 @@ import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
 import { RoleGuardService } from "./auth/role-guard.service";
 import { EventInfoComponent } from "./main-page/event-info/event-info.component";
+import { ReservationComponent } from "./main-page/event-info/reservation/reservation.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { MakeReservationComponent } from "./main-page/event-info/make-reservation/make-reservation.component";
 
@@ -18,6 +19,10 @@ const appRoutes: Routes = [
   {
     path: "login",
     component: LoginComponent
+  },
+  {
+    path: "reservation",
+    component: ReservationComponent
   },
   {
     path: "register",
