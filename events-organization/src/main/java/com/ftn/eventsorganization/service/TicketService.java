@@ -12,4 +12,5 @@ public interface TicketService {
 	boolean reservation(List<TicketDto> tickets, String username) throws ObjectNotFoundException, InvalidInputException;
 	boolean ticketExist(EventSector es, int c, int r);
 	boolean cancelReservation(Long id) throws ObjectNotFoundException;
+	boolean buy(Long id) throws ObjectNotFoundException;
 }

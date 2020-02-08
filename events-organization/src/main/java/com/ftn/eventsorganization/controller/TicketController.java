@@ -34,6 +34,7 @@ public class TicketController {
 	@Autowired
 	private JwtProvider provider;
 	
+	@PreAuthorize("hasRole('ROLE_VISITOR')")
 	@PostMapping(value = "/reservation", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity reservation (@RequestBody List<TicketDto> reservationTickets, HttpServletRequest http){
 		HttpServletRequest httpServletRequest = (HttpServletRequest)http;
@@ -61,8 +62,26 @@ public class TicketController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_VISITOR')")
-    @GetMapping("/{id}")
-    public ResponseEntity findOne(@PathVariable Long id) throws ObjectNotFoundException {
+    @PostMapping("/buy/{id}")
+	public ResponseEntity buyTicket(@PathVariable Long id){
+		ResponseMessage msg = new ResponseMessage();
+        try {
+            boolean d = ticketService.buy(id);
+            if (d == true){
+            	msg.setMessage("Successfully bought reservation!");
+            	return new ResponseEntity<>(msg, HttpStatus.OK);
+            }
+        } catch (ObjectNotFoundException ex) {
+        	msg.setMessage("Unsuccessful try of buy a ticket!");
+            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
+        }
+        msg.setMessage("Unsuccessful try of buying a ticket!");
+        return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_VISITOR')")
+    @PostMapping("/cancel/{id}")
+    public ResponseEntity cancelReservation(@PathVariable Long id) throws ObjectNotFoundException {
 
 		ResponseMessage msg = new ResponseMessage();
         try {
