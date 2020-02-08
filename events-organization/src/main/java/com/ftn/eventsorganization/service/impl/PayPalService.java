@@ -89,6 +89,7 @@ public class PayPalService {
         } catch (PayPalRESTException e) {
             System.err.println(e.getDetails());
         }
+        System.out.println(response);
         return response;
     }
 }

@@ -18,17 +18,22 @@ export class PaymentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.paymentId = this.route.snapshot.paramMap.get("paymentId");
-    this.payerId = this.route.snapshot.paramMap.get("PayerId");
+    console.log(this.route.snapshot);
+
+    this.paymentId = this.route.snapshot.queryParams.paymentId;
+    this.payerId = this.route.snapshot.queryParams.PayerID;
     this.completePayment();
   }
 
   completePayment() {
+    console.log(this.payerId);
+    console.log(this.paymentId);
+
     this.paymentService.completePayment(this.paymentId, this.payerId).subscribe(
       data => {
         alert("Payment successfull!");
         console.log(data);
-        this.router.navigate(["main"]);
+        // this.router.navigate(["main"]);
       },
       error => {
         console.log(error);
