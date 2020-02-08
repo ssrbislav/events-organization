@@ -47,6 +47,7 @@ import { EventsComponent } from "./main-page/events/events.component";
 import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsectors/define-eventsectors.component";
 import { EventInfoComponent } from './main-page/event-info/event-info.component';
 import { ReservationComponent } from './main-page/event-info/reservation/reservation.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ReservationComponent } from './main-page/event-info/reservation/reserva
     EventsComponent,
     DefineEventsectorsComponent,
     EventInfoComponent,
-    ReservationComponent
+    ReservationComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

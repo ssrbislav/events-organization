@@ -6,6 +6,7 @@ import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
 import { RoleGuardService } from "./auth/role-guard.service";
 import { EventInfoComponent } from "./main-page/event-info/event-info.component";
+import { PaymentComponent } from "./payment/payment.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/main", pathMatch: "full" },
@@ -36,6 +37,10 @@ const appRoutes: Routes = [
   {
     path: "event-info",
     component: EventInfoComponent
+  },
+  {
+    path: "payment",
+    component: PaymentComponent
   }
 ];
 
