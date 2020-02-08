@@ -90,5 +90,4 @@ public class EventTest {
         assertThat(dialog.isDisplayed());
         driver.close();
     }
-
 }
