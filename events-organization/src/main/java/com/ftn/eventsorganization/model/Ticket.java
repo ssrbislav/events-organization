@@ -2,6 +2,8 @@ package com.ftn.eventsorganization.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Ticket {
 
@@ -9,6 +11,7 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "reservation_id")
 	private Reservation reservation;

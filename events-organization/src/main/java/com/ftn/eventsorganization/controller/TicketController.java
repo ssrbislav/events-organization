@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +37,10 @@ public class TicketController {
 	@PostMapping(value = "/reservation", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity reservation (@RequestBody List<TicketDto> reservationTickets, HttpServletRequest http){
 		HttpServletRequest httpServletRequest = (HttpServletRequest)http;
-        String authToken = httpServletRequest.getHeader("Authorization");
-        System.out.println(authToken);
-        String username = this.provider.getUserNameFromJwtToken(authToken);
+		String username=SecurityContextHolder.getContext().getAuthentication().getName();
+        //String authToken = httpServletRequest.getHeader("Authorization");
+       // System.out.println(authToken);
+       // String username = this.provider.getUserNameFromJwtToken(authToken);
         System.out.println("Ulogovan korisnik je: " + username);
         
         ResponseMessage msg = new ResponseMessage();
