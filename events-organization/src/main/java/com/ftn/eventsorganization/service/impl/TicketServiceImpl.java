@@ -178,11 +178,14 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public boolean buy(Long id) throws ObjectNotFoundException {
 		Reservation r = reservationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Reservation with id" +id +"does not exist!"));
+		r.setDeleted(true);
+
 		List<Ticket> t = repository.findByReservation(r);
 		for (Ticket ticket : t) {
 			ticket.setBought(true);
 			repository.save(ticket);
 			}
+		reservationRepository.save(r);
 		return true;
 	}
 	

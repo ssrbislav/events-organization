@@ -10,15 +10,15 @@ export class TicketService {
 
   constructor(private http: HttpClient) {}
 
-  makeReservation(tickets: TicketDTO[]) {
-    this.http.post(`${this.url}/reservation`, tickets);
+  makeReservation(tickets: TicketDTO[], price: number) {
+    return this.http.post<any>(`${this.url}/reservation/${price}`, tickets);
   }
 
   cancelReservation(id: number) {
-    this.http.post(`${this.url}/cancel/${id}`, {});
+    return this.http.post<any>(`${this.url}/cancel/${id}`, {});
   }
 
   butTicket(id: number) {
-    this.http.post(`${this.url}/buy/${id}`, {});
+    return this.http.post<any>(`${this.url}/buy/${id}`, {});
   }
 }

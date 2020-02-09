@@ -4,6 +4,8 @@ import { EventService } from "src/app/services/event.service";
 import { Event } from "src/app/model/event.model";
 import { EventSector } from "src/app/model/eventSector.model";
 import { TicketDTO } from "src/app/model/ticket.model";
+import { TicketService } from "src/app/services/ticket.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-make-reservation",
@@ -26,7 +28,9 @@ export class MakeReservationComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<any>,
-    private eventService: EventService
+    private eventService: EventService,
+    private ticketService: TicketService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -69,8 +73,21 @@ export class MakeReservationComponent implements OnInit {
       ticket.eventId = this.event.id;
       ticket.row = row;
       ticket.sectorMark = sectorMark;
-      console.log(ticket);
+      this.tickets.push(ticket);
     });
+    console.log(this.tickets);
+    if (this.tickets.length === 0) {
+      alert("Select desired seats!");
+    } else {
+      this.ticketService
+        .makeReservation(this.tickets, this.totalPrice)
+        .subscribe(data => {
+          console.log(data);
+          alert("Reservation successful!");
+          this.dialogRef.close();
+          this.router.navigate(["../"]);
+        });
+    }
   }
 
   onCheckboxChange(option, es, event) {
