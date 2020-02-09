@@ -60,7 +60,13 @@ public class Reservation {
         return id;
     }
 
-    public boolean isCanceled() {
+	
+    public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public boolean isCanceled() {
         return canceled;
     }
 

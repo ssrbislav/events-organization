@@ -122,7 +122,7 @@ public class TicketServiceTestUnit {
         java.sql.Date exp2 = java.sql.Date.valueOf("2020-02-10");
         
         Reservation res = new Reservation(1L, v, ticketsEmp, false, resv, exp , false);
-        Reservation res2 = new Reservation(1L, v, ticketsEmp, false, resv2, exp2 , false);
+        Reservation res2 = new Reservation(2L, v, ticketsEmp, false, resv2, exp2 , false);
         
         Ticket t1 = new Ticket(1L, res, es, true, false, v, 4, 4);
         Ticket t2 = new Ticket(2L, res2, es, true, true, v, 3, 3);
@@ -145,8 +145,44 @@ public class TicketServiceTestUnit {
  
 	}
 	
+	@Test(expected=ObjectNotFoundException.class)
+	public void testReservationSectorNotFound() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SE", 1, 1);
+		List<TicketDto> tickets=new ArrayList<>();
+		tickets.add(t);
+		
+		boolean value=service.reservation(tickets, "user", 100);
+	}
+	
+	
+	@Test(expected=InvalidInputException.class)
+	public void testReservationInvalidInput() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
+		List<TicketDto> tickets=new ArrayList<>();
+		tickets.add(t);
+		
+		boolean value=service.reservation(tickets, "user", 100);
+	}
+	
+	@Test(expected=InvalidInputException.class)
+	public void testReservationMoreThanFiveCards() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
+		List<TicketDto> tickets=new ArrayList<>();
+		tickets.add(t);
+		tickets.add(t);
+		tickets.add(t);
+		tickets.add(t);
+		tickets.add(t);
+		tickets.add(t);	
+		boolean value=service.reservation(tickets, "user", 100);
+	}
+
 	@Test
-	public void testfindExpTickets() throws ParseException{
+	public void testReservationSuccessful() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
 		Location location = new Location(1L, "Arena", "Bulevar", 30, "Beograd", "11000", "Srbija");
 		Hall hall = new Hall("Hala1", location);
 		Sector sector = new Sector("SEC", 4L, 4L, hall);
@@ -157,73 +193,84 @@ public class TicketServiceTestUnit {
         Event event = new Event("Predstava", date, date2, EventType.FESTIVAL, location);
         event.setId(1L); 
         EventSector es = new EventSector(event, sector, 100, SectorType.REGULAR);
+		
+        boolean value = service.ticketExist(es, 4, 3);
+	}
+	
+	@Test
+	public void testReservationUnsuccessful() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		Location location = new Location(1L, "Arena", "Bulevar", 30, "Beograd", "11000", "Srbija");
+		Hall hall = new Hall("Hala1", location);
+		Sector sector = new Sector("SEC", 4L, 4L, hall);
+		sector.setId(1L);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date   date       = format.parse ( "2020-02-02" );  
+        Date   date2       = format.parse ( "2020-03-03" );  
+        Event event = new Event("Predstava", date, date2, EventType.FESTIVAL, location);
+        event.setId(1L); 
+        EventSector es = new EventSector(event, sector, 100, SectorType.REGULAR);
+        
+        boolean value = service.ticketExist(es, 4, 4);
+	}
+	
+	@Test(expected = ObjectNotFoundException.class)
+	public void testBuyUnSuccessful() throws ParseException, ObjectNotFoundException{
+		Location location = new Location(1L, "Arena", "Bulevar", 30, "Beograd", "11000", "Srbija");
+		Hall hall = new Hall("Hala1", location);
+    	Sector sector = new Sector("SEC", 4L, 4L, hall);
+		sector.setId(1L);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date   date       = format.parse ( "2020-02-02" );  
+        Date   date2       = format.parse ( "2020-03-03" );  
+        Event event = new Event("Predstava", date, date2, EventType.FESTIVAL, location);
+        event.setId(1L);
+        EventSector es = new EventSector(event, sector, 100, SectorType.REGULAR);
         Set <Role> r = new HashSet<>();
         r.add(new Role(RoleType.ROLE_VISITOR));
         Visitor v = new Visitor("user", "1234", "user@user.com", "Pera", "Peric",
                 date2, "Adresa", "062016468",r , true, false);
         List<Ticket> ticketsEmp = new ArrayList<>();
-        
         java.sql.Date resv = java.sql.Date.valueOf("2020-02-05");
         java.sql.Date exp = java.sql.Date.valueOf("2020-02-07");
+        
         Reservation res = new Reservation(1L, v, ticketsEmp, false, resv, exp , false);
+        res.setId(1L);
         Ticket t1 = new Ticket(1L, res, es, true, false, v, 4, 4);
-        Ticket t3 = new Ticket(3L, res, es, true, false, v, 1, 1);
         ticketsEmp.add(t1);
-        ticketsEmp.add(t3);
         res.setTickets(ticketsEmp);
-		List <Ticket> t = ticketRepository.findByBoughtAndReservation(false, res);		
-		assertTrue(t.size() == 0);
 
-	}
-	
-	@Test(expected=ObjectNotFoundException.class)
-	public void reservationSectorNotFound() throws ParseException, ObjectNotFoundException, InvalidInputException{
-		
-		TicketDto t=new  TicketDto(1L,"SE", 1, 1);
-		 List<TicketDto> tickets=new ArrayList<>();
-		 tickets.add(t);
-		
-		boolean value=service.reservation(tickets, "user", 100);
-		
-		
-		
-		
+        boolean value = service.buy(3L);
 	}
 	
 	
-	@Test(expected=InvalidInputException.class)
-	public void reservationInvalid() throws ParseException, ObjectNotFoundException, InvalidInputException{
-		
-		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
-		 List<TicketDto> tickets=new ArrayList<>();
-		 tickets.add(t);
-		
-		boolean value=service.reservation(tickets, "user", 100);
-		
-		
-		
-		
-	}
 	
-	@Test(expected=InvalidInputException.class)
-	public void reservationMoreThanFiveCards() throws ParseException, ObjectNotFoundException, InvalidInputException{
-		
-		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
-		 List<TicketDto> tickets=new ArrayList<>();
-		 tickets.add(t);
-		 tickets.add(t);
-		 tickets.add(t);
-		 tickets.add(t);
-		 tickets.add(t);
-		 tickets.add(t);
+	@Test(expected = ObjectNotFoundException.class)
+	public void testCancenlReservationUnSuccessful() throws ParseException, ObjectNotFoundException{
+		Location location = new Location(1L, "Arena", "Bulevar", 30, "Beograd", "11000", "Srbija");
+		Hall hall = new Hall("Hala1", location);
+    	Sector sector = new Sector("SEC", 4L, 4L, hall);
+		sector.setId(1L);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date   date       = format.parse ( "2020-02-02" );  
+        Date   date2       = format.parse ( "2020-03-03" );  
+        Event event = new Event("Predstava", date, date2, EventType.FESTIVAL, location);
+        event.setId(1L);
+        EventSector es = new EventSector(event, sector, 100, SectorType.REGULAR);
+        Set <Role> r = new HashSet<>();
+        r.add(new Role(RoleType.ROLE_VISITOR));
+        Visitor v = new Visitor("user", "1234", "user@user.com", "Pera", "Peric",
+                date2, "Adresa", "062016468",r , true, false);
+        List<Ticket> ticketsEmp = new ArrayList<>();
+        java.sql.Date resv = java.sql.Date.valueOf("2020-02-05");
+        java.sql.Date exp = java.sql.Date.valueOf("2020-02-07");
+        
+        Reservation res = new Reservation(1L, v, ticketsEmp, false, resv, exp , false);
+        res.setId(1L);
+        Ticket t1 = new Ticket(1L, res, es, true, false, v, 4, 4);
+        ticketsEmp.add(t1);
+        res.setTickets(ticketsEmp);
 
-		
-		boolean value=service.reservation(tickets, "user", 100);
-		
-		
-		
-		
+        boolean value = service.buy(3L);
 	}
-
-	
 }

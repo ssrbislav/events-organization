@@ -69,8 +69,8 @@ public class TicketRepositoryTest {
 	
 	@Test
 	public void testFindByEventSectorAndReserved() throws ParseException{
-		List<Ticket> tickets = (List<Ticket>)this.repository.findByEventSectorAndReserved(esRepository.getOne(4L), true);
-		assertTrue(tickets.size() == 0);
+		List<Ticket> tickets = (List<Ticket>)this.repository.findByEventSectorAndReserved(esRepository.getOne(1L), true);
+		assertTrue(tickets.size() == 1);
 	}
 	
 	@Test

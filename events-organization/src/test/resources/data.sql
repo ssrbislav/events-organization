@@ -24,5 +24,11 @@ insert into user(id, address, date_of_birth, email, first_name, last_name, passw
 (1, "Adresa", "1990-01-01", "visitor@visitor.com", "Ime", "Prezime", "visitor", "060123456", "visitor");	
 
 insert into visitor(active, blocked, id) values (1, 0, 1);
+
 insert into reservation(id, canceled, deleted, expire_date, reservation_date, visitor_id, price) values (1, 0, 0, "2020-05-03", "2020-05-02", "1", 200);
+
 insert into ticket(id, bought, reserved, seat_column, seat_row, visitor_id, event_sector_id, reservation_id) values (1, 0, 1, 1, 1, 1, 1, 1);
+
+insert into user(address, date_of_birth, email, first_name, last_name, password, phone_number, username) values 
+("Bulevar Oslobodjenja", "1990-02-02", "user@user.com", "Pera", "Zderic", "sifra123", "060123456", "korisnik");
+
