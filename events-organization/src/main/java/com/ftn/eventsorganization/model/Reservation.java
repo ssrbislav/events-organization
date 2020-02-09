@@ -35,6 +35,8 @@ public class Reservation {
     private Date expireDate;
     
     private boolean deleted;
+    
+    private double price;
 
     public Reservation() {}
     
@@ -108,6 +110,19 @@ public class Reservation {
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+
+
+
+	public double getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
     
+	
     
 }
