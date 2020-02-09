@@ -1,0 +1,68 @@
+<div class="overlay" *ngIf="isShow === true">
+  <h1>PLEASE WAIT</h1>
+</div>
+<div class="container">
+  <h3>RESERVATIONS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">ID</th>
+          <th class="head" scope="col">RESERVATION DATE</th>
+          <th class="head" scope="col">EXPIRE DATE</th>
+          <th class="head" scope="col">PRICE</th>
+          <th class="head" scope="col">NUM OF TICKETS</th>
+          <th class="head" scope="col">BUY TICKET</th>
+          <th class="head" scope="col">CANCEL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations; let i = index">
+          <td>{{reservation.id}}</td>
+          <td>{{reservation.reservationDate}}</td>
+          <td>{{reservation.expireDate}}</td>
+          <td>{{reservation.price}}</td>
+          <td>{{reservation.tickets.length}}</td>
+          <td id="location_pass">
+            <button id="halls" mat-raised-button (click)="buy(reservation)">
+              <mat-icon>done_all</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
+            <button mat-raised-button class="delete_btn">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <mat-divider></mat-divider>
+    </table>
+    <!-- <button class="new_loc" mat-raised-button (click)="addNewLocation()">ADD NEW LOCATION </button> -->
+  </div>
+</div>
+<div class="container">
+  <h3>BOUGHT TICKETS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">ID</th>
+          <th class="head" scope="col">BOUGHT</th>
+          <th class="head" scope="col">SEAT COLUMN</th>
+          <th class="head" scope="col">SEAT ROW</th>
+        </tr>
+      </thead>
+      <tbody>
+        <div *ngFor="let reservation of ticketReservations; let i = index">
+          <tr *ngFor="let ticket of reservation.tickets; let j = index">
+
+            <td>{{ticket.id}}</td>
+            <td>{{ticket.bought}}</td>
+            <td>{{ticket.seat_column}}</td>
+            <td>{{ticket.seat_row}}</td>
+          </tr>
+        </div>
+        <mat-divider></mat-divider>
+    </table>
+    <!-- <button class="new_loc" mat-raised-button (click)="addNewLocation()">ADD NEW LOCATION </button> -->
+  </div>
+</div>

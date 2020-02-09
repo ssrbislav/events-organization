@@ -1,0 +1,40 @@
+<div class="container">
+  <h3>LOCATIONS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">NAME</th>
+          <th class="head" scope="col">STREET NAME</th>
+          <th class="head" scope="col">NUMBER</th>
+          <th class="head" scope="col">CITY</th>
+          <th class="head" scope="col">ZIP CODE</th>
+          <th class="head" scope="col">COUNTRY</th>
+          <th class="head" scope="col">LIST HALLS</th>
+          <th class="head" scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let location of locations; let i = index">
+          <td>{{location.name}}</td>
+          <td>{{location.streetName}}</td>
+          <td>{{location.number}}</td>
+          <td>{{location.city}}</td>
+          <td>{{location.zipCode}}</td>
+          <td>{{location.country}}</td>
+          <td id="location_pass">
+            <button id="halls" mat-raised-button (click)="listHalls(location)">
+              <mat-icon>account_balance</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
+            <button mat-raised-button class="delete_btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <mat-divider></mat-divider>
+    </table>
+    <button class="new_loc" mat-raised-button (click)="addNewLocation()">ADD NEW LOCATION </button>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="pricelist grid-item">
+  <h3>CREATE NEW EVENT</h3>
+  <hr>
+  <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+
+    <mat-form-field class="example-full-width">
+      <input class="eventName" matInput placeholder="EVENT NAME" required name="name" [(ngModel)]="form.name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input type="datetime" class="startDate" matInput placeholder="START DATE" required name="startDate"
+        [(ngModel)]="form.startDate">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input type="datetime" class="endDate" matInput placeholder="END DATE" required name="endDate"
+        [(ngModel)]="form.endDate">
+    </mat-form-field>
+
+    <div class="form-group">
+      <mat-select name="eventType" [(ngModel)]="form.eventType" required placeholder="EVENT TYPE">
+        <mat-option *ngFor="let eventType of eventTypes" [value]='eventType'>
+          {{eventType}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+    <div class="form-group">
+      <mat-select name="location" [(ngModel)]="form.locationId" required placeholder="LOCATIONS">
+        <mat-option *ngFor="let location of locations" [value]='location.id'>
+          {{location.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+
+
+    <button class="create_btn" id="create_btn" type="submit" mat-raised-button>CREATE
+      EVENT</button>
+    <button class="close_btn" type="button" mat-raised-button mat-dialog-close>CLOSE </button>
+
+  </form>
+</div>

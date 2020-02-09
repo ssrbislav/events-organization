@@ -1,0 +1,76 @@
+.container {
+  display: flex;
+  margin-top: 100px;
+  background-color: rgb(255, 255, 255);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 30px;
+
+}
+
+.image {
+  background: url("../../../assets/images/event_img.jpg") center center;
+  background-size: cover;
+  width: 500px;
+  height: 250px;
+  margin: 0 auto;
+  box-shadow: 0px 7px 26px -4px rgba(0, 0, 0, 0.75);
+}
+
+.heading {
+  margin: 10px 0;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 5px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.text {
+  margin: 0 auto;
+  text-align: center;
+  padding: 5px;
+  padding-top: 0;
+}
+
+.home {
+  border: 1px solid rgb(87, 87, 87);
+  padding: 3px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 12px -4px rgba(0, 0, 0, 0.75);
+}
+
+.home:hover {
+  cursor: pointer;
+  box-shadow: 0px 2px 5px -4px rgba(0, 0, 0, 0.75);
+}
+
+button {
+  width: 400px;
+  background-color: rgb(31, 31, 31);
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+button:hover {
+  box-shadow: 0px 3px 16px 3px rgba(0, 0, 0, 0.75);
+}
+
+.address {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 20px;
+
+}
+
+.address em {
+  font-weight: 700;
+  text-decoration: none;
+}

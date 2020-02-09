@@ -1,0 +1,15 @@
+.example-form {
+  display: flex;
+  flex-direction: column;
+}
+
+button:hover {
+  background-color: rgb(31, 31, 31);
+  color: #fff;
+}
+
+.close_btn {
+  background-color: #fe7451;
+  color: #fff;
+  margin-top: 10px;
+}

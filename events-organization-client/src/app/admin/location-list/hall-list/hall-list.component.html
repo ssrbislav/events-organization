@@ -1,0 +1,31 @@
+<div class="container">
+  <h3>HALLS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">NAME</th>
+          <th class="head" scope="col">LIST SECTORS</th>
+          <th class="head" scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hall of halls; let i = index">
+          <td>{{hall.name}}</td>
+          <td id="location_pass">
+            <button id="list_sector" mat-raised-button (click)="listSectors(hall)">
+              <mat-icon>account_balance</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
+            <button mat-raised-button class="delete_btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <mat-divider></mat-divider>
+    </table>
+    <button class="new_hall" mat-raised-button (click)="addNewHall(locationId)">ADD NEW HALL </button>
+    <button id="close" class="close_btn" mat-raised-button mat-dialog-close>CLOSE </button>
+  </div>
+</div>

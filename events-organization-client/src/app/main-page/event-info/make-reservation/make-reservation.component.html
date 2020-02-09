@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="selection">
+    <h1>SELECT DESIRED SEATS</h1>
+    <div class="content">
+      <div class="seat-sector" *ngFor="let es of event.eventSector; let k = index" id="{{k}}">
+        <ol class="seat-matrix">
+          <div id="sector-vip" *ngIf="es.sectorType === 'VIP'"></div>
+          <div id="sector-love" *ngIf="es.sectorType === 'LOVE'"></div>
+          <div id="sector-regular" *ngIf="es.sectorType === 'REGULAR'"></div>
+          <li *ngFor="let seats of Arr(es.sector.numOfColumns).fill(0); let i = index" class="row row--1">
+            <ol class="seats" type="A">
+              <li *ngFor="let seat of Arr(es.sector.numOfRows).fill(0); let j = index" class="seat"
+                id="li{{ i }}{{ j }}">
+                <label>{{ k }}-{{ i }}-{{ j }}</label>
+                <input type="checkbox" value="{{ i }} {{ j }} {{ es.sector.sectorMark }}" class="seatinput"
+                  id="{{ i }}{{ j }}" (change)="onCheckboxChange(seat, es ,$event)" />
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class=" buttons">
+      <label class="button-economy label" for="">LOVE</label>
+      <label class="button-bussines label" for="">REGULAR</label>
+      <label class="button-first label" for="">VIP</label>
+      <label class="button-disble label" for="">DISABLED</label>
+    </div>
+  </div>
+  <div class="reservation">
+    <div class="price">
+      NUMBER OF TICKETS: {{checkedSeats.length}}
+      <hr />
+      TOTAL PRICE: ${{totalPrice}}
+    </div>
+    <div class="nav-buttons">
+      <button class="btn button-reserve" mat-raised-button (click)="reserveTickets()">
+        RESERVE
+      </button>
+      <button class="btn" mat-raised-button mat-dialog-close>
+        CLOSE
+      </button>
+    </div>
+  </div>
+</div>

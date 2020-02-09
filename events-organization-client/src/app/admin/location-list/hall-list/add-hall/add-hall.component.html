@@ -1,0 +1,13 @@
+<div class="pricelist grid-item">
+  <h3>CREATE NEW HALL</h3>
+  <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+    <mat-form-field class="example-full-width">
+      <input class="hall-elem" matInput placeholder="HALL NAME" required name="name" [(ngModel)]="hall.name">
+    </mat-form-field>
+
+    <button class="create_btn" id="create_btn" type="submit" mat-raised-button>CREATE
+      HALL</button>
+    <button id="close" class="close_btn" type="button" mat-raised-button mat-dialog-close>CLOSE </button>
+
+  </form>
+</div>

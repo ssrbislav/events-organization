@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 11;
+}

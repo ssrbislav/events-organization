@@ -1,0 +1,35 @@
+<div class="container">
+  <h3>SECTORS</h3>
+  <div class="wrapper">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="head" scope="col">SECTOR MARK</th>
+          <th class="head" scope="col">NUM OF ROWS</th>
+          <th class="head" scope="col">NUM OF COLUMNS</th>
+          <th class="head" scope="col">EDIT</th>
+          <th class="head" scope="col">DELETE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sector of sectors; let i = index">
+          <td>{{sector.sectorMark}}</td>
+          <td>{{sector.numOfRows}}</td>
+          <td>{{sector.numOfColumns}}</td>
+          <td id="delete">
+            <button class="edit_sector" mat-raised-button (click)="editSector(sector)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td id="delete">
+            <button mat-raised-button class="delete_btn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        <mat-divider></mat-divider>
+    </table>
+    <button class="new_sector" mat-raised-button (click)="addNewSector(hall.id)">ADD NEW SECTOR </button>
+    <button class="close_btn" mat-raised-button mat-dialog-close>CLOSE </button>
+  </div>
+</div>
