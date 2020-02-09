@@ -48,6 +48,7 @@ import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsect
 import { EventInfoComponent } from "./main-page/event-info/event-info.component";
 import { PaymentComponent } from "./payment/payment.component";
 import { MakeReservationComponent } from "./main-page/event-info/make-reservation/make-reservation.component";
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MakeReservationComponent } from "./main-page/event-info/make-reservatio
     DefineEventsectorsComponent,
     EventInfoComponent,
     PaymentComponent,
-    MakeReservationComponent
+    MakeReservationComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

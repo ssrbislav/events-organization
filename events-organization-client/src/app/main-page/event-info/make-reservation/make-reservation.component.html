@@ -12,8 +12,8 @@
               <li *ngFor="let seat of Arr(es.sector.numOfRows).fill(0); let j = index" class="seat"
                 id="li{{ i }}{{ j }}">
                 <label>{{ k }}-{{ i }}-{{ j }}</label>
-                <input type="checkbox" value="{{ i }}{{ j }}" class="seatinput" id="{{ i }}{{ j }}"
-                  (change)="onCheckboxChange(seat, es ,$event)" />
+                <input type="checkbox" value="{{ i }} {{ j }} {{ es.sector.sectorMark }}" class="seatinput"
+                  id="{{ i }}{{ j }}" (change)="onCheckboxChange(seat, es ,$event)" />
               </li>
             </ol>
           </li>
@@ -34,7 +34,7 @@
       TOTAL PRICE: ${{totalPrice}}
     </div>
     <div class="nav-buttons">
-      <button class="btn button-reserve" mat-raised-button mat-dialog-close>
+      <button class="btn button-reserve" mat-raised-button (click)="reserveTickets()">
         RESERVE
       </button>
       <button class="btn" mat-raised-button mat-dialog-close>
