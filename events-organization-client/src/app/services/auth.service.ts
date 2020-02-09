@@ -13,6 +13,8 @@ const httpOptions = {
   providedIn: "root"
 })
 export class AuthService {
+  private user: any;
+  private getUserUrl = "http://localhost:8080/api/user/one";
   private loginUrl = "http://localhost:8080/api/user/login";
   private registrationUrl = "http://localhost:8080/api/user/register";
 
@@ -24,5 +26,9 @@ export class AuthService {
 
   signUp(info: SignupInfo) {
     return this.http.post<any>(this.registrationUrl, info, httpOptions);
+  }
+
+  getUser(username: string) {
+    return this.http.get<any>(`${this.getUserUrl}/${username}`);
   }
 }

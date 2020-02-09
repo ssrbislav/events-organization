@@ -112,9 +112,9 @@ public class EventSeviceTest {
         eventDTO.setEventType(EventType.CONCERT);
         eventDTO.setLocationId(1L);
 
-        String valuee = "2020-01-01";
+        String valuee = "2020-03-03";
         Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(valuee);
-        String value = "2020-01-09";
+        String value = "2020-03-09";
         Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(value);
 
         eventDTO.setStartDate(startDate);

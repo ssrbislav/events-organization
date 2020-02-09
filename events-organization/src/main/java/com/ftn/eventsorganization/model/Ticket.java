@@ -26,6 +26,7 @@ public class Ticket {
 	@Column(nullable = false)
 	private boolean bought;
 
+	@JsonIgnore
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "visitor_id", nullable = false)
 	private Visitor buyer;

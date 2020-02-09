@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class EventService {
   private url = "http://localhost:8080/api/event";
-  private url2 = "http://localhost:8080/api/event_sector/create";
+  private url2 = "http://localhost:8080/api/event_sector";
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,14 @@ export class EventService {
   }
 
   createEventSector(data: EventSectorDTO) {
-    return this.http.post<EventSector>(this.url2, data, httpOptions);
+    return this.http.post<EventSector>(
+      `${this.url2}/create`,
+      data,
+      httpOptions
+    );
+  }
+
+  getEventSectorByEvent(id: number) {
+    return this.http.get<EventSector[]>(`${this.url2}/all/${id}`);
   }
 }

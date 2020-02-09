@@ -6,8 +6,9 @@ import { RegisterComponent } from "./register/register.component";
 import { AdminComponent } from "./admin/admin.component";
 import { RoleGuardService } from "./auth/role-guard.service";
 import { EventInfoComponent } from "./main-page/event-info/event-info.component";
-import { ReservationComponent } from "./main-page/event-info/reservation/reservation.component";
 import { PaymentComponent } from "./payment/payment.component";
+import { MakeReservationComponent } from "./main-page/event-info/make-reservation/make-reservation.component";
+import { UserComponent } from "./user/user.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/main", pathMatch: "full" },
@@ -18,10 +19,6 @@ const appRoutes: Routes = [
   {
     path: "login",
     component: LoginComponent
-  },
-  {
-    path: "reservation",
-    component: ReservationComponent
   },
   {
     path: "register",
@@ -45,7 +42,27 @@ const appRoutes: Routes = [
   },
   {
     path: "payment",
-    component: PaymentComponent
+    component: PaymentComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_VISITOR"
+    }
+  },
+  {
+    path: "user",
+    component: UserComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_VISITOR"
+    }
+  },
+  {
+    path: "make-reservation",
+    component: MakeReservationComponent,
+    canActivate: [RoleGuardService],
+    data: {
+      expectedRole: "ROLE_VISITOR"
+    }
   }
 ];
 

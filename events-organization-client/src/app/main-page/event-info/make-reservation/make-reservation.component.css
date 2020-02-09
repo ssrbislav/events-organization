@@ -1,0 +1,201 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 10px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 15px;
+}
+
+.seat-matrix {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(71, 71, 71);
+  padding: 10px 20px;
+  background: #fff;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+.seats {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.seat {
+  padding: 2px;
+  position: relative;
+  margin: 5px;
+  background: #272727;
+  color: white
+}
+
+.seat input {
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  max-width: 500px;
+}
+
+.button-economy {
+  background: #bd2121;
+  color: white;
+}
+
+.button-bussines {
+  background: rgb(2, 88, 146);
+  color: white;
+}
+
+.button-first {
+  background: rgb(150, 136, 13);
+  color: white;
+}
+
+.button-disble {
+  background: #ccc;
+  color: rgb(46, 46, 46);
+}
+
+.button-enable {
+  margin-top: 10px;
+  background: rgb(71, 71, 71);
+  color: white;
+}
+
+.label {
+  font-weight: normal;
+  margin: 0 auto;
+  font-size: 14px;
+  padding: 10px;
+  width: 100px;
+}
+
+.button-choose {
+  margin-left: 120px;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100px;
+}
+
+.button-close {
+  float: right;
+  margin-top: 10px;
+  padding: 10px;
+  width: 100px;
+}
+
+.button-choose:hover {
+  background: #a8dfb0;
+  color: white;
+}
+
+.button-close:hover {
+  background: gray;
+  color: white
+}
+
+.seat:hover {
+  opacity: 0.8;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: none;
+}
+
+
+/* RESERVATION PART */
+
+.reservation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.reservation div {
+  max-width: 800px;
+}
+
+.price {
+  margin: 10px auto;
+  width: 300px;
+  padding: 30px;
+  color: #fff;
+  background-color: #272727;
+  text-align: center;
+}
+
+.btn {
+  margin: 10px;
+  width: 200px;
+  height: 50px;
+}
+
+.button-reserve {
+  color: #fff;
+  background-color: #1c6d62;
+}
+
+.btn:hover {
+  background-color: #272727;
+  color: #fff;
+}
+
+/* SECTOR COLOR */
+
+#sector-love {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #bd2121;
+}
+
+#sector-vip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #96880d;
+}
+
+#sector-regular {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #025892;
+}

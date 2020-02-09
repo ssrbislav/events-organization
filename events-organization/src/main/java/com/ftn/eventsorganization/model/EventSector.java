@@ -18,7 +18,6 @@ public class EventSector {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "sector_id")
     private Sector sector;

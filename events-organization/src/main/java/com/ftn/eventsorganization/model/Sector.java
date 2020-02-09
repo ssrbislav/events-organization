@@ -26,6 +26,7 @@ public class Sector {
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "sector")
     private List<EventSector> eventSectors;
 

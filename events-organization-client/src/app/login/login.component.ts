@@ -35,12 +35,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loginInfo = new LoginInfo(this.form.username, this.form.password);
+    console.log("A OVDE MOZDA");
 
     this.authService.attemptAuth(this.loginInfo).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUsername(data.username);
         this.tokenStorage.saveAuthorities(data.authorities);
+
         this.isLoggedIn = true;
         this.isLoginFailed = false;
         this.roles = this.tokenStorage.getAuthorities();

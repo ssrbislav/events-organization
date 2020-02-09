@@ -45,9 +45,10 @@ import { AddHallComponent } from "./admin/location-list/hall-list/add-hall/add-h
 import { AddEventComponent } from "./admin/event-list/add-event/add-event.component";
 import { EventsComponent } from "./main-page/events/events.component";
 import { DefineEventsectorsComponent } from "./admin/event-list/define-eventsectors/define-eventsectors.component";
-import { EventInfoComponent } from './main-page/event-info/event-info.component';
-import { ReservationComponent } from './main-page/event-info/reservation/reservation.component';
-import { PaymentComponent } from './payment/payment.component';
+import { EventInfoComponent } from "./main-page/event-info/event-info.component";
+import { PaymentComponent } from "./payment/payment.component";
+import { MakeReservationComponent } from "./main-page/event-info/make-reservation/make-reservation.component";
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -69,8 +70,9 @@ import { PaymentComponent } from './payment/payment.component';
     EventsComponent,
     DefineEventsectorsComponent,
     EventInfoComponent,
-    ReservationComponent,
-    PaymentComponent
+    PaymentComponent,
+    MakeReservationComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

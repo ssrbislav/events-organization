@@ -5,8 +5,11 @@ import com.ftn.eventsorganization.DTO.LoginDTO;
 import com.ftn.eventsorganization.DTO.RegistrationDTO;
 import com.ftn.eventsorganization.DTO.ResponseMessage;
 import com.ftn.eventsorganization.exception.InvalidInputException;
+import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.User;
+import com.ftn.eventsorganization.model.Visitor;
 import com.ftn.eventsorganization.repository.UserRepository;
+import com.ftn.eventsorganization.repository.VisitorRepository;
 import com.ftn.eventsorganization.security.JwtProvider;
 import com.ftn.eventsorganization.service.impl.VisitorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +53,14 @@ public class UserController {
         List<User> users = userRepository.findAll();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/one/{username}")
+    public ResponseEntity<?> getLoggedInUser(@PathVariable String username) throws ObjectNotFoundException {
+
+        User user = this.userRepository.findByUsername(username).orElseThrow(() ->  new ObjectNotFoundException("User with username " + username + " does not exist!"));
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/login")

@@ -28,6 +28,14 @@ public class EventSectorController {
         return new ResponseEntity<>(eventSectors, HttpStatus.OK);
     }
 
+    @GetMapping("all/{id}")
+    public ResponseEntity<List<EventSector>> findAllByEvent(@PathVariable Long id) throws ObjectNotFoundException {
+
+        List<EventSector> eventSectors = service.findAllByEvent(id);
+        return new ResponseEntity<>(eventSectors, HttpStatus.OK);
+    }
+
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<EventSector> findById(@PathVariable Long id) throws ObjectNotFoundException {

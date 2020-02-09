@@ -15,7 +15,7 @@
         <li (click)="logout()">LOGOUT</li>
       </ul>
       <ul *ngIf="(showView) == 'visitor'">
-        <li>{{ username.toUpperCase() }}</li>
+        <li routerLink="user" id="user">{{ username.toUpperCase() }}</li>
         <li (click)="logout()">LOGOUT</li>
       </ul>
     </div>

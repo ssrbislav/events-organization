@@ -38,6 +38,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  showUser() {
+    this.router.navigate(["user"]);
+  }
+
   logout() {
     window.sessionStorage.clear();
     location.reload();
