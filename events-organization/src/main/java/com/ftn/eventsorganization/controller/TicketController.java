@@ -35,8 +35,8 @@ public class TicketController {
 	private JwtProvider provider;
 	
 	@PreAuthorize("hasRole('ROLE_VISITOR')")
-	@PostMapping(value = "/reservation", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity reservation (@RequestBody List<TicketDto> reservationTickets, HttpServletRequest http){
+	@PostMapping(value = "/reservation/{price}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity reservation (@RequestBody List<TicketDto> reservationTickets, @PathVariable double price,HttpServletRequest http){
 		HttpServletRequest httpServletRequest = (HttpServletRequest)http;
 		String username=SecurityContextHolder.getContext().getAuthentication().getName();
         //String authToken = httpServletRequest.getHeader("Authorization");
@@ -46,7 +46,7 @@ public class TicketController {
         
         ResponseMessage msg = new ResponseMessage();
         try {
-			boolean succsses  = ticketService.reservation(reservationTickets, username);
+			boolean succsses  = ticketService.reservation(reservationTickets, username,price);
 			if(succsses) {
 				msg.setMessage("You successfully reserved your tickets!");
 			} else {

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 
 import org.junit.Before;
@@ -26,9 +27,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.ftn.eventsorganization.DTO.TicketDto;
 import com.ftn.eventsorganization.enumeration.EventType;
 import com.ftn.eventsorganization.enumeration.RoleType;
 import com.ftn.eventsorganization.enumeration.SectorType;
+import com.ftn.eventsorganization.exception.InvalidInputException;
+import com.ftn.eventsorganization.exception.ObjectNotFoundException;
 import com.ftn.eventsorganization.model.Event;
 import com.ftn.eventsorganization.model.EventSector;
 import com.ftn.eventsorganization.model.Hall;
@@ -171,4 +175,55 @@ public class TicketServiceTestUnit {
 		assertTrue(t.size() == 0);
 
 	}
+	
+	@Test(expected=ObjectNotFoundException.class)
+	public void reservationSectorNotFound() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SE", 1, 1);
+		 List<TicketDto> tickets=new ArrayList<>();
+		 tickets.add(t);
+		
+		boolean value=service.reservation(tickets, "user", 100);
+		
+		
+		
+		
+	}
+	
+	
+	@Test(expected=InvalidInputException.class)
+	public void reservationInvalid() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
+		 List<TicketDto> tickets=new ArrayList<>();
+		 tickets.add(t);
+		
+		boolean value=service.reservation(tickets, "user", 100);
+		
+		
+		
+		
+	}
+	
+	@Test(expected=InvalidInputException.class)
+	public void reservationMoreThanFiveCards() throws ParseException, ObjectNotFoundException, InvalidInputException{
+		
+		TicketDto t=new  TicketDto(1L,"SEC", 1, 1);
+		 List<TicketDto> tickets=new ArrayList<>();
+		 tickets.add(t);
+		 tickets.add(t);
+		 tickets.add(t);
+		 tickets.add(t);
+		 tickets.add(t);
+		 tickets.add(t);
+
+		
+		boolean value=service.reservation(tickets, "user", 100);
+		
+		
+		
+		
+	}
+
+	
 }

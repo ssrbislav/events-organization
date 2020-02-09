@@ -56,7 +56,7 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	@Transactional(rollbackFor = ObjectNotFoundException.class)
 	//kreiranje rezervacije
-	public boolean reservation(List<TicketDto> tickets, String username) throws ObjectNotFoundException, InvalidInputException {
+	public boolean reservation(List<TicketDto> tickets, String username, double price) throws ObjectNotFoundException, InvalidInputException {
 		Visitor v = this.visitorRepository.findByUsername(username).orElseThrow(() ->  new ObjectNotFoundException("User with username " + username + " does not exist!"));
 		
 		if(tickets.size() > 5){
@@ -91,6 +91,7 @@ public class TicketServiceImpl implements TicketService {
 			}
 		}
 		if (savedticket == true){
+			r.setPrice(price);
 			reservationRepository.save(r);}
 		else{
 			throw new InvalidInputException("Unesena rezervacija je neadekvatna!");
